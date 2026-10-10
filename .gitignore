@@ -3,3 +3,5 @@ __pycache__/
 .DS_Store
 .position-guard-local.log
 .position-guard.pid
+
+/read_only/node_modules/
