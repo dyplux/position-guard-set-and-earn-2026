@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-10-10T10:32:11.680369+00:00",
+  "chain_id": 97,
+  "registry": "0x8004a818bfb912233c491871b3d84c89a494bd9e",
+  "agent_id": 2583,
+  "owner": "0xF9Ad22cAA6C179Eee86806FA10176e845ea8e982",
+  "registration_tx_hash": "0x9b8bae8df548aaa1444b0ddb8cd97038825c842f2ea228bc40ee99f06af2cc30",
+  "registration_block": 135958417,
+  "receipt_status": 1,
+  "owner_of_matches": true,
+  "token_uri_matches_reviewed_public_service": true,
+  "service": "https://positionguard.dyplux.com/",
+  "agent_card": "https://positionguard.dyplux.com/.well-known/agent-card.json",
+  "funding": {
+    "network": "BNB Chain testnet",
+    "amount_test_bnb": "0.02",
+    "tx_hash": "0xe769a25087c40fa241854e023ae831a183015eab7731dac353a562267e49ef63",
+    "not_a_qualifying_lending_action": true
+  },
+  "scope": "Identity and read-only service only",
+  "signatures": 2,
+  "transactions": 2,
+  "mainnet_transactions": 0,
+  "marketplace_listed": false,
+  "outgoing_hires": 0,
+  "independent_client_hires": 0,
+  "qualifying_lending_actions": 0,
+  "campaign_qualified": false
+}
