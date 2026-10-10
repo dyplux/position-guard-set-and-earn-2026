@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-10-10T12:00:30.773728+00:00",
+  "address": "0xF3a34e06015e019D6154a0f1089f695B27122f50",
+  "chain_id": 97,
+  "full_runtime_match": false,
+  "executable_bytes_exact": true,
+  "actual_runtime_sha256": "9acccb9295ecf800806820ca8b52f9cebcae32afc8541e3c8c59e39cedca10f8",
+  "vbnb_binding": "0x2E7222e51c0f6e98610A1543Aa3836E092CDe62c",
+  "source": "Verified Etherscan source and official Venus frontend deployment reference",
+  "transactions": 0
+}

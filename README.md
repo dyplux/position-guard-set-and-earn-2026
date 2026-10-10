@@ -1,6 +1,6 @@
 # Position Guard by Dyplux
 
-Position Guard 0.2.0 is a read-only candidate for assessing Venus Core positions on BNB Chain testnet, chain 97. It has no signer, transaction path, automatic repayment, payment flow or wallet-secret handling. It has ERC-8004 identity 2583 on chain 97, owned by the registered campaign wallet. It isn't listed or qualified for Set and Earn.
+Position Guard 0.2.0 is a read-only candidate for assessing Venus Core positions on BNB Chain testnet, chain 97. The public service has no signer, automatic repayment, payment flow or wallet-secret handling. A separate local operator completed bounded testnet collateral setup. It has ERC-8004 identity 2583 on chain 97, owned by the registered campaign wallet. It isn't listed or qualified for Set and Earn.
 
 The four UI examples are labelled `SYNTHETIC`. Five synthetic state-override conformance checks matched the real lens. They weren't loans, transactions or economic execution. A real debt-bearing wallet wasn't found in the bounded sample, so real-loan handling isn't claimed as empirically proven.
 
@@ -10,7 +10,7 @@ Agent ID **2583**, BNB Chain testnet, chain **97**. Registry: `0x8004A818BFB9122
 
 [Recorded onchain proof](docs/identity-2026-10-10.json) · [Registration transaction](https://testnet.bscscan.com/tx/0x9b8bae8df548aaa1444b0ddb8cd97038825c842f2ea228bc40ee99f06af2cc30)
 
-Identity registration and test funding are preparation steps. Neither is a qualifying lending action. There are no marketplace hires or executed lending interventions yet.
+Identity registration and test funding are preparation steps. Neither is a qualifying lending action. There are no marketplace hires, borrowed loan or repayment yet. Bounded native collateral setup is recorded below.
 
 ## Public preview
 
@@ -61,7 +61,7 @@ Use this host-network command on Linux. Run nginx on the same host. Don't publis
 
 ## Evidence and limits
 
-The collector uses effective liquidation weights, the spot oracle and exact integer truncation, including nominal VAI debt. It requires agreement with onchain account liquidity and a second RPC backend. Runtime routes, code and block hash are checked. Lens, PolicyFacet and Diamond bytes matched the pinned repository; the active MarketFacet is only an observed code pin.
+The collector uses effective liquidation weights, the spot oracle and exact integer truncation, including nominal VAI debt. It requires agreement with onchain account liquidity and a second RPC backend. Runtime routes, code and block hash are checked. Lens, PolicyFacet and Diamond bytes matched the pinned repository; the original v0.2 reader uses a strict MarketFacet code pin; a later full source recompilation is recorded below.
 
 Oracle feed timestamps and accrued-current balances remain limitations. The 1.35 review threshold and 1.60 target are candidate settings. A suggested USD repayment isn't token calldata or a guarantee. Receipts prove canonical consistency, not source authenticity.
 
@@ -74,3 +74,17 @@ python3 -m unittest -v test_server.py
 ## Use from an AI agent
 
 Configure a stdio MCP server with command `python3` and args containing the absolute path to `mcp_stdio.py`. The three read-only tools observe a public testnet wallet, assess a supplied snapshot and verify a receipt. Supplied data stays `SUPPLIED_UNVERIFIED`; only the controlled collector produces `OBSERVED`. No tool can sign or transact.
+
+## Recorded native collateral setup
+
+The registered wallet supplied **0.001 testBNB** to Venus Core vBNB and entered that market. Both transactions were reconciled from receipts and position state. There is no debt. These are two setup transactions on one day; five useful actions on three days and independent hires remain incomplete.
+
+[Actual setup evidence](docs/native-setup-2026-10-10.json) · [Pure setup planner](keeper_plan.py) · [Local operator reference and limits](operations/README.md)
+
+```sh
+python3 keeper_snapshot.py
+```
+
+This key-free command observes the registered wallet and evaluates the planner. Completed setup returns `NO_ACTION_SETUP_COMPLETE`; it doesn't manufacture another transaction.
+
+Supplemental verification: [Core MarketFacet full runtime match](docs/core-market-source-2026-10-10.json), [vBNB exact executable logic with metadata digest difference](docs/vbnb-source-2026-10-10.json), [Maximillion source/binding](docs/maximillion-source-2026-10-10.json). The unchanged v0.2 collector still prints its older conservative pin-only wording. The later source proofs are separate, and no code/route check was removed. Source matching isn't a security audit.

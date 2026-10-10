@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-10-10T11:53:24.894431+00:00",
+  "status": "VERIFIED_EXECUTABLE_LOGIC_METADATA_DIGEST_DIFFERS",
+  "source": "Etherscan V2 chain97 verified source",
+  "compiler": "0.5.17+commit.d19bba13",
+  "full_runtime_match": false,
+  "exact_executable_bytes_match": true,
+  "same_cbor_layout_and_compiler": true,
+  "only_bzzr1_digest_differs": true,
+  "difference_bytes": 32,
+  "whole_actual_runtime_pin": "551f3372553aa792ee3e80a21b4916904b23913759868d72e383204be598dc1c",
+  "accepted_scope": "Bounded chain97 testnet native supply/setup only; no financial-safety guarantee or source-text checksum equality claim",
+  "no_generic_masking": true,
+  "metadata_only_proof_not_security_audit": true
+}

@@ -1,0 +1,33 @@
+{
+  "checked_at": "2026-10-10T12:16:50.493649+00:00",
+  "chain_id": 97,
+  "owner": "0xF9Ad22cAA6C179Eee86806FA10176e845ea8e982",
+  "agent_id": 2583,
+  "supply": {
+    "tx_hash": "0xa4a710e070947d1306ba434765db778280fe87127e6604f34ee173a764221cc5",
+    "native_amount_wei": "1000000000000000",
+    "vtoken_balance_raw": "92314",
+    "debt_raw": "0",
+    "block": 135972156
+  },
+  "enter": {
+    "tx_hash": "0x09a526a979978e1002305072d9380fa8f4b2cfec43cca01c463ed94141af2b45",
+    "entered_markets": [
+      "0x2E7222e51c0f6e98610A1543Aa3836E092CDe62c"
+    ],
+    "block": 135972490
+  },
+  "setup_planner_result": "NO_ACTION",
+  "total_lending_setup_transactions": 2,
+  "distinct_days": 1,
+  "loan_borrowed": false,
+  "repayment_executed": false,
+  "source_scope": "Core market exact full recompilation; vBNB executable logic exact with explicitly reported metadata digest difference",
+  "actual_private_operator_sha256": "af46cb8d4565acf3c14d8de2593c52157d969802061564280b1da71f6ac4ccda",
+  "portable_operator_sha256": "e9b9c9cffd1b6521a4541f0a2c7009c23b45d88492df3b488eb31d381db58430",
+  "operator_difference": "Operational filesystem/interpreter/dependency paths configurable, same economic checks; portable reference not independently deployed",
+  "primary_target_is_read_only": true,
+  "campaign_qualified": false,
+  "independent_client_hires": 0,
+  "five_actions_three_days_complete": false
+}

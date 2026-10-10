@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-10-10T11:32:22.054Z",
+  "source": "Verified source returned by Etherscan V2 chain97 contract API",
+  "compiler": "0.8.25+commit.b61c2a91",
+  "exact_runtime_match": true,
+  "actual_runtime_bytes": 14782,
+  "compiled_runtime_bytes": 14782,
+  "actual_runtime_sha256": "91d7e557a4357deb856bde056f7473f983812a694031b7104947f3c50d94dac0",
+  "immutable_references": {},
+  "transactions": 0
+}
