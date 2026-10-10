@@ -257,6 +257,27 @@ class Handler(BaseHTTPRequestHandler):
             return self.wfile.write(payload)
         if parsed.path == "/health":
             return self.send_json(200, {"status": "ready", "chain_id": 97, "execution_enabled": False})
+        if parsed.path.startswith("/deliverables/"):
+            store_path = getattr(self.server, "delivery_store", None)
+            if not store_path:
+                return self.send_json(404, {"error": "DELIVERY_HOSTING_DISABLED"})
+            try:
+                from marketplace.deliverables import read_manifest_bytes
+                components = parsed.path.split("/")
+                if len(components) != 4 or not components[3].endswith(".json"):
+                    raise ValueError("INVALID_REFERENCE")
+                payload = read_manifest_bytes(store_path, components[2], components[3][:-5])
+            except (ValueError, OSError, RuntimeError):
+                return self.send_json(404, {"error": "DELIVERABLE_UNAVAILABLE"})
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(payload)))
+            self.send_header("Cache-Control", "no-store")
+            self.send_header("X-Content-Type-Options", "nosniff")
+            self.send_header("Connection", "close")
+            self.end_headers()
+            self.close_connection = True
+            return self.wfile.write(payload)
         if parsed.path in {"/.well-known/agent-card.json", "/a2a", "/a2a/.well-known/agent-card.json"}:
             public = self.server.public_origin
             return self.send_json(200, {"name": "Position Guard by Dyplux" if public else "Position Guard by Dyplux (local prototype)",
@@ -321,6 +342,7 @@ def build_parser():
     parser.add_argument("--request-timeout", type=int, default=5)
     parser.add_argument("--endpoint-timeout", type=int, default=30)
     parser.add_argument("--rate-limit", type=int, default=60, help="requests per direct peer per minute")
+    parser.add_argument("--delivery-store", type=Path, help="Opt-in local database of consented public deliverables")
     return parser
 
 
@@ -338,6 +360,7 @@ def main(argv=None):
     server = BoundedHTTPServer(("127.0.0.1", args.port), Handler, args.public_origin,
                                args.max_inflight, args.request_timeout,
                                args.endpoint_timeout, args.rate_limit)
+    server.delivery_store = args.delivery_store
     server.serve_forever()
 
 
