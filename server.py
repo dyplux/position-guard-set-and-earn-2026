@@ -257,12 +257,12 @@ class Handler(BaseHTTPRequestHandler):
             return self.wfile.write(payload)
         if parsed.path == "/health":
             return self.send_json(200, {"status": "ready", "chain_id": 97, "execution_enabled": False})
-        if parsed.path == "/.well-known/agent-card.json":
+        if parsed.path in {"/.well-known/agent-card.json", "/a2a", "/a2a/.well-known/agent-card.json"}:
             public = self.server.public_origin
             return self.send_json(200, {"name": "Position Guard by Dyplux" if public else "Position Guard by Dyplux (local prototype)",
                 "description": "Read-only Venus Core testnet position assessment candidate. No signer or automatic repayment.",
                 "url": (public or "http://127.0.0.1:"+str(self.server.server_port))+"/a2a", "version": "0.2.0",
-                "protocolVersion": "0.3.0", "defaultInputModes": ["text"], "defaultOutputModes": ["text", "application/json"],
+                "protocolVersion": "0.3.0", "category": "health_factor", "defaultInputModes": ["text", "application/json"], "defaultOutputModes": ["text", "application/json"],
                 "capabilities": {"streaming": False}, "skills": [{"id": "assess_venus_position", "name": "Assess a Venus position",
                     "description": "Provide a public wallet address on chain 97; returns read-only evidence and a receipt.",
                     "tags": ["health-factor", "testnet", "read-only"], "examples": ["Assess wallet 0x..."]}]})
@@ -287,13 +287,24 @@ class Handler(BaseHTTPRequestHandler):
                     return self.send_json(400, {"jsonrpc": "2.0", "id": payload.get("id"), "error": {"code": -32601, "message": "Unsupported method"}})
                 parts = payload.get("params", {}).get("message", {}).get("parts", [])
                 text = " ".join(p.get("text", "") for p in parts if isinstance(p, dict) and p.get("kind") == "text")
-                match = re.search(r"0x[0-9a-fA-F]{40}\b", text)
+                data_parts = [p.get("data") for p in parts if isinstance(p, dict) and p.get("kind") == "data"]
+                if data_parts:
+                    if len(data_parts) != 1 or not isinstance(data_parts[0], dict):
+                        raise ValueError("SINGLE_DATA_PART_REQUIRED")
+                    data = data_parts[0]
+                    if data.get("skill") != "assess_venus_position":
+                        return self.send_json(200, {"jsonrpc": "2.0", "id": payload.get("id"), "error": {
+                            "code": -32601, "message": "Seller negotiation isn't enabled; assessment only"}})
+                    if type(data.get("chain_id", 97)) is not int or data.get("chain_id", 97) != 97 or type(data.get("wallet")) is not str:
+                        raise ValueError("TESTNET_WALLET_REQUIRED")
+                    text = data["wallet"]
+                match = re.fullmatch(r"0x[0-9a-fA-F]{40}", text) if data_parts else re.search(r"0x[0-9a-fA-F]{40}\b", text)
                 if not match:
                     raise ValueError("PUBLIC_WALLET_REQUIRED")
                 result = assess(self.observe(match.group()), collector_attested=True)
                 return self.send_json(200, {"jsonrpc": "2.0", "id": payload.get("id"), "result": {
                     "kind": "message", "messageId": result["receipt_sha256"][:24], "role": "agent",
-                    "parts": [{"kind": "text", "text": json.dumps(result, ensure_ascii=True)}]}})
+                    "parts": [{"kind": "data", "data": result}] if data_parts else [{"kind": "text", "text": json.dumps(result, ensure_ascii=True)}]}})
             return self.send_json(404, {"error": "NOT_FOUND"})
         except ObservationBusy:
             return self.send_json(503, {"error": "OBSERVATION_BUSY"})
