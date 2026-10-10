@@ -1,0 +1,28 @@
+{
+  "chain_id": 97,
+  "controller": "0x94d1820b2D1c7c7452A163983Dc888CEC546b77D",
+  "source_commit": "0cc9211d9722694492553b9c2951724f76c9ee63",
+  "components": {
+    "diamond": {
+      "address": "0xbb34bBC161C9dbBE1dbCbC0A03478581f04b0E44",
+      "sha256": "336dde22fa16021500937709bf893f8265eff644d36d76b77d62e84ffe263b70",
+      "repo_runtime_match": true
+    },
+    "lens": {
+      "address": "0x0Dab769617B2d690DDbe8A6D730D9C9b85F26ca0",
+      "sha256": "fda3b836cac5d4f53e396ec2f71a4d3cbdb703e13739440f014280c3850593d7",
+      "repo_runtime_match": true
+    },
+    "policy": {
+      "address": "0x808746E246393a98209990844951826D67da970A",
+      "sha256": "66d156eea77f5b048b7d60383ae62982726ac83e5db224724861137e9df07bc4",
+      "repo_runtime_match": true
+    },
+    "market": {
+      "address": "0x52f4c550a310340284e07B4A8A2722c20C71D39B",
+      "sha256": "91d7e557a4357deb856bde056f7473f983812a694031b7104947f3c50d94dac0",
+      "repo_runtime_match": false,
+      "scope": "Observed runtime pin. Getter consumed by verified lens; no full source-match or audit claim."
+    }
+  }
+}

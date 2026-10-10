@@ -1,0 +1,91 @@
+{
+  "checked_at": "2026-10-10T00:09:47.582750+00:00",
+  "block": "0x8194bf6",
+  "scope": "SYNTHETIC_STATE_OVERRIDE_CONFORMANCE_ONLY_NOT_REAL_DEBT_OR_QUALIFICATION",
+  "real_lens": "0x0Dab769617B2d690DDbe8A6D730D9C9b85F26ca0",
+  "results": [
+    {
+      "synthetic_borrow_raw": "0",
+      "synthetic_vai_repay_mantissa": "0",
+      "expected": [
+        "0",
+        "480000000000000000000",
+        "0"
+      ],
+      "decoded": [
+        "0",
+        "480000000000000000000",
+        "0"
+      ],
+      "pass": true,
+      "rpc_error": null
+    },
+    {
+      "synthetic_borrow_raw": "500000000000000000",
+      "synthetic_vai_repay_mantissa": "0",
+      "expected": [
+        "0",
+        "180000000000000000000",
+        "0"
+      ],
+      "decoded": [
+        "0",
+        "180000000000000000000",
+        "0"
+      ],
+      "pass": true,
+      "rpc_error": null
+    },
+    {
+      "synthetic_borrow_raw": "1200000000000000000",
+      "synthetic_vai_repay_mantissa": "0",
+      "expected": [
+        "0",
+        "0",
+        "240000000000000000000"
+      ],
+      "decoded": [
+        "0",
+        "0",
+        "240000000000000000000"
+      ],
+      "pass": true,
+      "rpc_error": null
+    },
+    {
+      "synthetic_borrow_raw": "500000000000000000",
+      "synthetic_vai_repay_mantissa": "100000000000000000000",
+      "expected": [
+        "0",
+        "80000000000000000000",
+        "0"
+      ],
+      "decoded": [
+        "0",
+        "80000000000000000000",
+        "0"
+      ],
+      "pass": true,
+      "rpc_error": null
+    },
+    {
+      "synthetic_borrow_raw": "1",
+      "synthetic_vai_repay_mantissa": "0",
+      "expected": [
+        "0",
+        "479999999999999999400",
+        "0"
+      ],
+      "decoded": [
+        "0",
+        "479999999999999999400",
+        "0"
+      ],
+      "pass": true,
+      "rpc_error": null
+    }
+  ],
+  "status": "PASS",
+  "signatures": 0,
+  "transactions": 0
+}

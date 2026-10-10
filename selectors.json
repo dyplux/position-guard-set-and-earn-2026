@@ -1,0 +1,19 @@
+{
+  "getAllMarkets()": "0xb0772d0b",
+  "getAssetsIn(address)": "0xabfceffc",
+  "getAccountLiquidity(address)": "0x5ec88c79",
+  "oracle()": "0x7dc0d1d0",
+  "markets(address)": "0x8e8f294b",
+  "getAccountSnapshot(address)": "0xc37f68e2",
+  "getUnderlyingPrice(address)": "0xfc57d4df",
+  "balanceOf(address)": "0x70a08231",
+  "borrowBalanceStored(address)": "0x95dd9193",
+  "identityRegistry()": "0x134e18f4",
+  "listingCount()": "0xa9b07c26",
+  "comptrollerImplementation()": "0xbb82aa5e",
+  "comptrollerLens()": "0xd3270f99",
+  "facetAddress(bytes4)": "0xcdffacc6",
+  "getEffectiveLtvFactor(address,address,uint8)": "0x19ef3e8b",
+  "vaiController()": "0x9254f5e5",
+  "getVAIRepayAmount(address)": "0x78c2f922"
+}
