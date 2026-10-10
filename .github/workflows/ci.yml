@@ -25,4 +25,4 @@ jobs:
           cache-dependency-path: read_only/package-lock.json
       - run: npm ci --ignore-scripts --no-audit --no-fund
         working-directory: read_only
-      - run: node --test test_mainnet_unsigned.cjs test_negotiation.cjs test_submission.cjs
+      - run: node --test test_mainnet_unsigned.cjs test_negotiation.cjs test_submission.cjs test_quote_grant.cjs

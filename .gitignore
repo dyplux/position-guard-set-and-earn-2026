@@ -5,3 +5,4 @@ __pycache__/
 .position-guard.pid
 
 /read_only/node_modules/
+/operations/private-quote-state/

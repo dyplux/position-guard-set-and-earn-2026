@@ -7,6 +7,7 @@ test('SDK quote content is canonically hashed and testnet bound',()=>{
  const draft=prepareQuote(input);assert.equal(draft.envelope.negotiation_hash,keccak256(toBytes(canonicalJson(draft.content))));
  assert.equal(draft.content.chain_id,97);assert.equal(draft.content.currency,BINDINGS.paymentToken);
  assert.equal(draft.envelope.provider_sig,null);assert.equal(draft.status,'UNSIGNED_QUOTE_ONLY');
+ assert.match(draft.content.terms.quality_standards,/ERC-8004 97\/2583; assess_venus_position/);
 });
 test('unicode and sanitization conform to SDK claim encoding',()=>{
  assert.equal(canonicalJson({z:'ação',a:1}),'{'+'"a":1,"z":"a\\u00e7\\u00e3o"}');
@@ -14,7 +15,8 @@ test('unicode and sanitization conform to SDK claim encoding',()=>{
  assert.equal(draft.envelope.request.task_description,'[Venus]\u0000 test');
 });
 test('bad amounts, missing terms and invalid expiry stop',()=>{
- for(const change of [{priceWei:0n},{priceWei:1},{priceWei:10n**18n+1n},{now:NaN},{ttlSeconds:901},{terms:{} }])assert.throws(()=>prepareQuote({...input,...change}));
+ for(const change of [{priceWei:0n},{priceWei:1},{priceWei:10n**18n+1n},{now:NaN},{ttlSeconds:901},{terms:{} },
+   {terms:{deliverables:'JSON',quality_standards:'x'.repeat(2000)}}])assert.throws(()=>prepareQuote({...input,...change}));
 });
 test('expiry and altered content fail before signature recovery',async()=>{
  const draft=prepareQuote(input);

@@ -4,6 +4,7 @@ const BINDINGS=Object.freeze({chainId:97,agentId:2583,
   provider:'0xF9Ad22cAA6C179Eee86806FA10176e845ea8e982',
   commerce:'0xa206c0517B6371C6638CD9e4a42Cc9f02A33B0DE',
   paymentToken:'0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565'});
+const SERVICE_MARKER='Position Guard ERC-8004 97/2583; assess_venus_position; read-only';
 function canonicalJson(value){
   function sort(v){
     if(v===null||typeof v==='string'||typeof v==='boolean')return v;
@@ -24,6 +25,8 @@ function prepareQuote({task,terms,priceWei,now,ttlSeconds=900}){
   if(!Number.isSafeInteger(now)||now<=0||!Number.isSafeInteger(ttlSeconds)||ttlSeconds<1||ttlSeconds>900)throw Error('QUOTE_CLOCK_STOP');
   if(typeof priceWei!=='bigint'||priceWei<=0n||priceWei>10n**18n)throw Error('TESTNET_PRICE_CAP_STOP');
   const normalizedTerms={deliverables:clean(terms?.deliverables),quality_standards:clean(terms?.quality_standards)};
+  if(!normalizedTerms.quality_standards.endsWith(SERVICE_MARKER))normalizedTerms.quality_standards+=' | '+SERVICE_MARKER;
+  normalizedTerms.quality_standards=clean(normalizedTerms.quality_standards);
   const normalizedTask=clean(task);
   const content={version:1,negotiated_at:now,task:normalizedTask,terms:normalizedTerms,
     price:priceWei.toString(),currency:getAddress(BINDINGS.paymentToken),quote_expires_at:now+ttlSeconds,
