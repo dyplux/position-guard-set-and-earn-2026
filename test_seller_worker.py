@@ -35,7 +35,7 @@ class SellerWorkerTests(unittest.TestCase):
         bridge.close()
         self.snapshot = fixture('hold')
         self.snapshot.update(wallet_address=self.wallet,block_timestamp=self.now,
-                             checked_at=dt.datetime.fromtimestamp(self.now,dt.timezone.utc).isoformat())
+                             checked_at=dt.datetime.fromtimestamp(self.now,dt.timezone.utc).isoformat().replace('+00:00','Z'))
         self.calls = 0
         self.store = DeliveryStore(self.path)
         self.worker = self.make_worker()
@@ -53,6 +53,7 @@ class SellerWorkerTests(unittest.TestCase):
 
     def test_restart_replays_exact_bytes_without_collection(self):
         first = self.worker.process(self.key)
+        self.assertEqual(json.loads(first['receipt_bytes'])['decision'],'HOLD')
         self.store.close()
         self.store = DeliveryStore(self.path)
         self.worker = self.make_worker()
@@ -121,10 +122,19 @@ class SellerWorkerTests(unittest.TestCase):
     def test_malformed_snapshot_and_foreign_receipt_stop(self):
         self.snapshot['checked_at'] = None
         with self.assertRaises(ValueError):self.worker.process(self.key)
-        self.snapshot['checked_at'] = dt.datetime.fromtimestamp(self.now,dt.timezone.utc).isoformat()
+        self.snapshot['checked_at'] = dt.datetime.fromtimestamp(self.now,dt.timezone.utc).isoformat().replace('+00:00','Z')
         self.worker.assess = lambda _snapshot,**_kwargs:assess(fixture('hold'))
         with self.assertRaises(ValueError):self.worker.process(self.key)
         self.assertIsNone(self.store.get(self.key))
+
+    def test_replace_and_metadata_corruption_stop(self):
+        self.worker.process(self.key)
+        with self.assertRaises(sqlite3.IntegrityError):
+            with self.store.db:self.store.db.execute('INSERT OR REPLACE INTO deliveries SELECT * FROM deliveries WHERE job_key=?',(self.key,))
+        payload = json.loads(self.store.db.execute('SELECT payload FROM jobs WHERE key=?',(self.key,)).fetchone()[0])
+        payload['synthetic'] = False
+        with self.store.db:self.store.db.execute('UPDATE jobs SET payload=? WHERE key=?',(json.dumps(payload),self.key))
+        with self.assertRaises(ValueError):self.worker.process(self.key)
 
 
 if __name__ == '__main__':unittest.main()

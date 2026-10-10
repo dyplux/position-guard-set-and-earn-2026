@@ -32,9 +32,11 @@ class AssessmentWorker:
         if type(now) is not int or not 0 <= now <= 2**63-1 or type(current) is not int or abs(current-now)>5:
             raise ValueError("UTC_SECONDS_REQUIRED")
         # Bridge and worker share a local database. HTTP JSON can't insert a job.
-        row = self.store.db.execute("SELECT fingerprint,payload FROM jobs WHERE key=?", (job_key,)).fetchone()
+        row = self.store.db.execute("SELECT fingerprint,payload,payload_sha FROM jobs WHERE key=?", (job_key,)).fetchone()
         if row is None:
             raise ValueError("VALIDATED_JOB_REQUIRED")
+        if row[2] is None or hashlib.sha256(row[1].encode()).hexdigest() != row[2]:
+            raise ValueError("JOB_PAYLOAD_CORRUPT_OR_LEGACY")
         observed = json.loads(row[1])
         job = observed["job"]
         if hashlib.sha256(canonical_bytes(job)).hexdigest() != row[0]:
@@ -79,6 +81,7 @@ class AssessmentWorker:
         finish = self.clock()
         if type(finish) is not int or finish < now or uint(job["expiredAt"]) <= finish:
             raise ValueError("JOB_EXPIRED_DURING_ASSESSMENT")
+        assessed_at = finish
         if (not isinstance(receipt, dict) or self.verify(receipt) is not True
                 or receipt.get("authority") != "NONE" or receipt.get("execution_enabled") is not False
                 or receipt.get("policy_version") != "0.2.0"
@@ -94,7 +97,7 @@ class AssessmentWorker:
         # NEED_EVIDENCE stays NEED_EVIDENCE; persistence isn't service completion.
         manifest_bytes = canonical_bytes(manifest)
         finish = self.clock()
-        if (type(finish) is not int or finish < now or uint(job["expiredAt"]) <= finish
+        if (type(finish) is not int or finish < assessed_at or uint(job["expiredAt"]) <= finish
                 or not -5 <= finish-block_time <= 60 or not -5 <= finish-checked.timestamp() <= 60):
             raise ValueError("DELIVERY_EXPIRED_OR_STALE")
         return self.store.persist(job_key, receipt_bytes, manifest_bytes)

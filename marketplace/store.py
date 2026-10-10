@@ -11,6 +11,7 @@ class DeliveryStore:
         self.db.execute("CREATE TABLE IF NOT EXISTS deliveries (job_key TEXT PRIMARY KEY, receipt BLOB NOT NULL CHECK(typeof(receipt)='blob' AND length(receipt) BETWEEN 1 AND 262144), manifest BLOB NOT NULL CHECK(typeof(manifest)='blob' AND length(manifest) BETWEEN 1 AND 262144), receipt_sha TEXT NOT NULL CHECK(length(receipt_sha)=64), manifest_sha TEXT NOT NULL CHECK(length(manifest_sha)=64))")
         self.db.execute("CREATE TRIGGER IF NOT EXISTS delivery_no_update BEFORE UPDATE ON deliveries BEGIN SELECT RAISE(ABORT,'APPEND_ONLY_DELIVERY'); END")
         self.db.execute("CREATE TRIGGER IF NOT EXISTS delivery_no_delete BEFORE DELETE ON deliveries BEGIN SELECT RAISE(ABORT,'APPEND_ONLY_DELIVERY'); END")
+        self.db.execute("CREATE TRIGGER IF NOT EXISTS delivery_no_replace BEFORE INSERT ON deliveries WHEN EXISTS(SELECT 1 FROM deliveries WHERE job_key=NEW.job_key) BEGIN SELECT RAISE(ABORT,'APPEND_ONLY_DELIVERY'); END")
         self.db.commit()
 
     def close(self):

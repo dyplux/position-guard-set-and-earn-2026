@@ -30,7 +30,9 @@ class AtlasBridge:
         self.deployment = address(deployment)
         self.db = sqlite3.connect(store_path)
         self.db.execute("PRAGMA synchronous=FULL")
-        self.db.execute("CREATE TABLE IF NOT EXISTS jobs (key TEXT PRIMARY KEY, fingerprint TEXT NOT NULL, payload TEXT NOT NULL)")
+        self.db.execute("CREATE TABLE IF NOT EXISTS jobs (key TEXT PRIMARY KEY, fingerprint TEXT NOT NULL, payload TEXT NOT NULL, payload_sha TEXT)")
+        if "payload_sha" not in {column[1] for column in self.db.execute("PRAGMA table_info(jobs)")}:
+            self.db.execute("ALTER TABLE jobs ADD COLUMN payload_sha TEXT")
         self.db.commit()
 
     def close(self):
@@ -82,12 +84,19 @@ class AtlasBridge:
             key = f"erc8183:97:{self.deployment}:{job_id}"
             canonical = json.dumps(job, sort_keys=True, separators=(",", ":"))
             fingerprint = hashlib.sha256(canonical.encode()).hexdigest()
+            payload = json.dumps(observed, allow_nan=False)
+            payload_sha = hashlib.sha256(payload.encode()).hexdigest()
             with self.db:
-                previous = self.db.execute("SELECT fingerprint FROM jobs WHERE key=?", (key,)).fetchone()
+                previous = self.db.execute("SELECT fingerprint,payload,payload_sha FROM jobs WHERE key=?", (key,)).fetchone()
                 if previous and previous[0] != fingerprint:
                     raise ValueError("CONFLICTING_JOB_STOP")
+                if previous and previous[2] is not None and hashlib.sha256(previous[1].encode()).hexdigest() != previous[2]:
+                    raise ValueError("JOB_STORE_CORRUPT")
                 if not previous:
-                    self.db.execute("INSERT INTO jobs VALUES (?,?,?)", (key, fingerprint, json.dumps(observed)))
+                    self.db.execute("INSERT INTO jobs (key,fingerprint,payload,payload_sha) VALUES (?,?,?,?)", (key, fingerprint, payload, payload_sha))
+                elif previous[2] is None:
+                    # Legacy rows acquire a checksum only after this fresh reader validation.
+                    self.db.execute("UPDATE jobs SET payload=?,payload_sha=? WHERE key=?", (payload,payload_sha,key))
             result = {"status": "recorded", "job_id": str(job_id), "local_state": "VALIDATED_LOCAL_ONLY",
                       "execution_enabled": False, "delivery_completed": False}
             return {"jsonrpc": "2.0", "id": request_id, "result": {"kind": "message", "role": "agent",
