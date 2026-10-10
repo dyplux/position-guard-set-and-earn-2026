@@ -13,7 +13,7 @@ test('quote-only grant pins one exact draft and zero transactions',()=>{
  for(const change of [{state:'PROPOSED_NOT_AUTHORIZED'},{chain_id:56},{price_wei:'1'},{max_signatures:2},
   {transaction_dispatches:1},{expires_at:2000000000},{content_sha256:'0'.repeat(64)}])assert.throws(()=>preflight({...grant,...change},draft,2000000000));
 });
-test('unauthorized grant stops before any filesystem or key access',async()=>{
+test('caller-supplied grant cannot authorize execution or select key paths',async()=>{
  const {draft,grant}=fixture();await assert.rejects(signQuote({draft,grant,
   stateDir:'/unavailable',walletEnv:'/never-read'}));
 });

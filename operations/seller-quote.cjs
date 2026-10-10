@@ -1,7 +1,9 @@
 /* Isolated one-shot quote signer. Never imports a wallet into the public server. */
-const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),os=require('node:os');
 const {BINDINGS,prepareQuote,verifyQuote,canonicalJson}=require('../marketplace/negotiation.cjs');
-const AUTHORITY_ROOT='/var/lib/position-guard-quote';
+const LOCAL_OPERATOR=process.platform==='darwin';
+const OPERATOR_UID=LOCAL_OPERATOR?os.userInfo().uid:0;
+const AUTHORITY_ROOT=LOCAL_OPERATOR?path.join(os.userInfo().homedir,'.config','position-guard-quote'):'/var/lib/position-guard-quote';
 function digest(value){return crypto.createHash('sha256').update(canonicalJson(value)).digest('hex');}
 function preflight(grant,draft,now){
  if(!grant||grant.state!=='AUTHORIZED'||grant.scope!=='SELLER_QUOTE_ONLY'
@@ -18,13 +20,13 @@ function preflight(grant,draft,now){
 }
 function privateDirectory(dir){
  const stat=fs.lstatSync(dir);
- if(!stat.isDirectory()||stat.isSymbolicLink()||stat.uid!==0||(stat.mode&0o077)!==0)throw Error('OPERATOR_DIRECTORY_REQUIRED');
+ if(!stat.isDirectory()||stat.isSymbolicLink()||stat.uid!==OPERATOR_UID||(stat.mode&0o077)!==0)throw Error('OPERATOR_DIRECTORY_REQUIRED');
 }
 function privateFile(file){
  const fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW);
  try{
   const stat=fs.fstatSync(fd);
-  if(!stat.isFile()||stat.uid!==0||(stat.mode&0o777)!==0o600||stat.size>32768)throw Error('OPERATOR_FILE_REQUIRED');
+  if(!stat.isFile()||stat.uid!==OPERATOR_UID||(stat.mode&0o777)!==0o600||stat.size>32768)throw Error('OPERATOR_FILE_REQUIRED');
   return fs.readFileSync(fd,'utf8');
  }finally{fs.closeSync(fd);}
 }
@@ -33,17 +35,23 @@ function persist(file,value){
  const dir=fs.openSync(path.dirname(file),'r');try{fs.fsyncSync(dir);}finally{fs.closeSync(dir);}
 }
 async function signQuote({draft}){
- if(typeof process.getuid!=='function'||process.getuid()!==0)throw Error('OPERATOR_AUTHORITY_REQUIRED');
+ if(typeof process.getuid!=='function'||process.getuid()!==OPERATOR_UID)throw Error('OPERATOR_AUTHORITY_REQUIRED');
  // Untrusted callers can't supply grants, state paths, or a wallet source.
  const stateDir=path.join(AUTHORITY_ROOT,'state'),grantDir=path.join(AUTHORITY_ROOT,'grants');
  privateDirectory(AUTHORITY_ROOT);privateDirectory(grantDir);privateDirectory(stateDir);
  const grantText=privateFile(path.join(grantDir,digest(draft)+'.json'));
  const grant=JSON.parse(grantText);
  const checked=preflight(grant,draft,Math.floor(Date.now()/1000));
+ let walletEnv=path.join(AUTHORITY_ROOT,'wallet.env');
+ if(LOCAL_OPERATOR){
+  const config=JSON.parse(privateFile(path.join(AUTHORITY_ROOT,'operator.json')));
+  if(config.provider!==BINDINGS.provider||typeof config.wallet_env!=='string'||!path.isAbsolute(config.wallet_env))throw Error('OPERATOR_WALLET_BINDING_REQUIRED');
+  walletEnv=config.wallet_env;
+ }
  const base=path.join(stateDir,checked.content_sha256);
  // Lock is durable before key loading/signing. Any ambiguous crash needs reconciliation.
  persist(base+'.lock',{status:'SIGNATURE_MAY_EXIST',quote_hash:checked.quote_hash,dispatches:0});
- const match=privateFile(path.join(AUTHORITY_ROOT,'wallet.env')).match(/^SET_EARN_CAMPAIGN_PRIVATE_KEY=['"]?(0x[0-9a-fA-F]{64})['"]?\s*$/m);
+ const match=privateFile(walletEnv).match(/^SET_EARN_CAMPAIGN_PRIVATE_KEY=['"]?(0x[0-9a-fA-F]{64})['"]?\s*$/m);
  if(!match)throw Error('EXPECTED_KEY_FIELD_REQUIRED');
  const {privateKeyToAccount}=require('../read_only/node_modules/viem/accounts');
  const account=privateKeyToAccount(match[1]);
