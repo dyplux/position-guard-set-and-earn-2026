@@ -18,7 +18,7 @@ function fixture(){
 }
 test('bounded event range binds provider and remains synthetic under injected transport',async()=>{
  const f=fixture(),result=await scan({from_block:100,previous_hash:hash},{request:f.request,seal:async()=>{}});
- assert.equal(result.to_block,107);assert.equal(result.attested,false);assert.equal(result.synthetic,true);
+ assert.equal(result.to_block,116);assert.equal(result.attested,false);assert.equal(result.synthetic,true);
  assert.deepEqual(result.events,[{job_id:7,tx_hash:tx,log_index:1,block_number:100,block_hash:hash}]);
 });
 test('anchor reorg and forged provenance stop before processing',async()=>{
@@ -52,7 +52,7 @@ test('disabled getLogs falls back to successful canonical block receipts without
   return original(url,method,params);
  };
  const result=await scan({from_block:100,previous_hash:hash},{request:f.request,seal:async()=>{}});
- assert.equal(result.to_block,107);assert.equal(result.events.length,1);assert.equal(result.attested,false);
+ assert.equal(result.to_block,116);assert.equal(result.events.length,1);assert.equal(result.attested,false);
 });
 test('receipt fallback bounds the whole page across blocks',async()=>{
  const f=fixture(),original=f.request;
@@ -62,4 +62,17 @@ test('receipt fallback bounds the whole page across blocks',async()=>{
   return original(url,method,params);
  };
  await assert.rejects(()=>scan({from_block:100,previous_hash:hash},{request:f.request,seal:async()=>{}}),/BUDGET/);
+});
+test('receipt reads have bounded concurrency and pages never exceed 128 blocks',async()=>{
+ const f=fixture(),original=f.request;f.head='0x200';let active=0,peak=0,reads=0;
+ f.request=async(url,method,params)=>{
+  if(method==='eth_getLogs')throw Error('LOGS_DISABLED');
+  if(method==='eth_getBlockReceipts'){
+   active++;peak=Math.max(peak,active);reads++;
+   await new Promise(resolve=>setTimeout(resolve,1));active--;return [];
+  }
+  return original(url,method,params);
+ };
+ const result=await scan({from_block:100,previous_hash:hash},{request:f.request,seal:async()=>{}});
+ assert.equal(result.to_block,227);assert.equal(reads,256);assert.equal(peak,4);
 });

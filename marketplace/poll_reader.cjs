@@ -25,7 +25,7 @@ async function scan(input,{request=rpc,seal=assertSeal}={}){
   from_block:input.from_block,previous_hash:anchors[0].hash.toLowerCase()};
  const height=heights[0]<heights[1]?heights[0]:heights[1];
  if(height<12n||height-12n<start)return {...base,status:'WAIT_CONFIRMATIONS',events:[]};
- const safe=height-12n,stop=safe<start+7n?safe:start+7n,block=tag(stop),states=[];
+ const safe=height-12n,stop=safe<start+127n?safe:start+127n,block=tag(stop),states=[];
  const topics=encodeEventTopics({abi:FUNDED_ABI,eventName:'JobFunded',args:{provider:BINDINGS.provider}});
  for(const url of URLS){
   const head=validateHeader(await request(url,'eth_getBlockByNumber',[block,false]),block);
@@ -35,8 +35,12 @@ async function scan(input,{request=rpc,seal=assertSeal}={}){
   try{logs=await request(url,'eth_getLogs',[{address:BINDINGS.commerce,topics,fromBlock:tag(start),toBlock:block}]);}
   catch{
    logs=[];let receiptCount=0,logCount=0;
-   for(let n=start;n<=stop;n++){
-    const receipts=await request(url,'eth_getBlockReceipts',[tag(n)]);
+   // Four bounded read requests at a time keep discovery ahead of new blocks.
+   for(let first=start;first<=stop;first+=4n){
+    const numbers=[];for(let n=first;n<=stop&&n<first+4n;n++)numbers.push(n);
+    const pages=await Promise.all(numbers.map(n=>request(url,'eth_getBlockReceipts',[tag(n)])));
+    for(let offset=0;offset<pages.length;offset++){
+    const n=numbers[offset],receipts=pages[offset];
     if(!Array.isArray(receipts)||(receiptCount+=receipts.length)>512)throw Error('SCAN_RECEIPT_BUDGET_STOP');
     for(const receipt of receipts){
      if(!Array.isArray(receipt.logs)||(logCount+=receipt.logs.length)>2048)throw Error('SCAN_RECEIPT_LOG_STOP');
@@ -46,6 +50,7 @@ async function scan(input,{request=rpc,seal=assertSeal}={}){
         ||receipt.transactionHash!==log.transactionHash||receipt.blockHash!==log.blockHash)throw Error('SCAN_RECEIPT_PROVENANCE_STOP');
       logs.push(log);
      }
+    }
     }
    }
   }

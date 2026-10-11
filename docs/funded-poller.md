@@ -11,7 +11,7 @@ State lives in a pre-existing or newly-created owner-only directory. The
 poller database is `poll.sqlite` (mode 0600), and `poller.lock` is nonblocking.
 `--start-block` is recorded once; a later mismatch stops. The cursor advances
 only in the same SQLite transaction that inserts the bounded event batch.
-Pages are limited to 8 blocks and 64 events, the pending queue to 256 jobs,
+Pages are limited to 128 blocks and 64 events, the pending queue to 256 jobs,
 and event identity is `(job_id, tx_hash, log_index, block_number, block_hash)`. A conflicting
 provenance stops with `REORG_STOP` and never advances the cursor. Reorg pauses,
 queue backpressure, and malformed/forged/wrong-chain scanner output require
@@ -37,3 +37,5 @@ errors are not printed.
 If eth_getLogs is disabled, the fixed reader checks block receipts instead. The whole page is capped at 512 receipts and 2048 logs per RPC. Discovery pins the current confirmed deployment; the job runner independently rechecks historical funding, quote and job state before collection. Missing archive state stops that verification.
 
 Use --scan-only to record events without collecting positions. A public scanner observation never grants signing or submission authority.
+
+Receipt fallback runs at most four read requests concurrently per RPC. This bounds network load while allowing the cursor to catch up. Receipt/log/event limits remain global for each page.
