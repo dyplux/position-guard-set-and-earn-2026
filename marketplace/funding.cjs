@@ -117,7 +117,7 @@ async function verifyFundedJob({jobId,envelope,fundingTxHash,urls,now=Math.floor
   for(const method of ['ownerOf','getAgentWallet'])if(!sameAddress(await readContract(request,url,registry,`function ${method}(uint256) view returns (address)`,[2583n],block),BINDINGS.provider))throw Error('REGISTRY_PROVIDER_BINDING_STOP');
   const reconciled=validateHeader(await request(url,'eth_getBlockByNumber',[block,false]),block);
   if(reconciled.hash!==header.hash)throw Error('CURRENT_REORG_STOP');
-  states.push({header,job});
+  states.push({header:{number:header.number,hash:header.hash,timestamp:header.timestamp},job});
  }
  if(stable(states[0])!==stable(states[1]))throw Error('RPC_CURRENT_JOB_DISAGREEMENT');
  const {header:currentHeader,job:current}=states[0];
