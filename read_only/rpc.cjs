@@ -2,7 +2,8 @@
 const crypto = require('node:crypto');
 const {encodeFunctionData, decodeFunctionResult, parseAbi} = require('viem');
 const METHODS = new Set(['eth_chainId','eth_gasPrice','eth_blockNumber','eth_getBlockByNumber',
-  'eth_getCode','eth_getBalance','eth_call','eth_estimateGas','eth_getStorageAt']);
+  'eth_getCode','eth_getBalance','eth_call','eth_estimateGas','eth_getStorageAt',
+  'eth_getLogs','eth_getTransactionReceipt','eth_getTransactionByHash']);
 let sequence = 0;
 async function rpc(url, method, params = []) {
   if (!METHODS.has(method)) throw Error('READ_ONLY_METHOD_REQUIRED');

@@ -8,9 +8,11 @@ COMMERCE = "0xa206c0517b6371c6638cd9e4a42cc9f02a33b0de"
 CURRENCY = "0xc70b8741b8b07a6d61e54fd4b20f22fa648e5565"
 
 
-def _bind_pokter_job(observed, *, quote_lookup):
+def _bind_pokter_job(observed, *, quote_lookup, allow_synthetic=False):
     """No HTTP-provided attestation: both readers are controlled local dependencies."""
-    if (observed.get("attested") is not True or type(observed.get("chain_id")) is not int
+    public = observed.get("attested") is True and observed.get("synthetic") is not True and observed.get("source_kind")!="SYNTHETIC"
+    synthetic = allow_synthetic is True and observed.get("synthetic") is True and observed.get("source_kind")=="SYNTHETIC" and observed.get("funding_verified") is True
+    if (not (public or synthetic) or type(observed.get("chain_id")) is not int
             or observed["chain_id"] != 97 or address(observed["deployment"]) != COMMERCE):
         raise ValueError("REVIEWED_JOB_READER_REQUIRED")
     job = observed["job"]
@@ -51,9 +53,11 @@ def _bind_pokter_job(observed, *, quote_lookup):
             "execution_enabled":False}
 
 
-def bind_pokter_job(observed, *, quote_lookup):
+def bind_pokter_job(observed, *, quote_lookup, allow_synthetic=False):
     """Local envelope binding only; doesn't authorize processing or submission."""
     try:
-        return _bind_pokter_job(observed,quote_lookup=quote_lookup)
+        if type(allow_synthetic) is not bool:
+            raise ValueError("EXPLICIT_SYNTHETIC_MODE_REQUIRED")
+        return _bind_pokter_job(observed,quote_lookup=quote_lookup,allow_synthetic=allow_synthetic)
     except (KeyError,TypeError,AttributeError,ValueError,OverflowError,RecursionError):
         raise ValueError("POKTER_JOB_BINDING_STOP") from None

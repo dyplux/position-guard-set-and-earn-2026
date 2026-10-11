@@ -13,12 +13,15 @@ def canonical_bytes(value):
 
 class AssessmentWorker:
     def __init__(self, *, store, collect_fn, assess_fn, verify_receipt_fn, contracts,
-                 collector_attested=False, clock_fn=lambda: int(time.time())):
+                 collector_attested=False, allow_synthetic=False, clock_fn=lambda: int(time.time())):
         self.store = store
         self.collect = collect_fn
         self.assess = assess_fn
         self.verify = verify_receipt_fn
         self.clock = clock_fn
+        if type(allow_synthetic) is not bool:
+            raise ValueError("EXPLICIT_SYNTHETIC_MODE_REQUIRED")
+        self.allow_synthetic = allow_synthetic
         if type(collector_attested) is not bool:
             raise ValueError("EXPLICIT_COLLECTOR_TRUST_REQUIRED")
         self.collector_attested = collector_attested
@@ -41,7 +44,8 @@ class AssessmentWorker:
         job = observed["job"]
         if hashlib.sha256(canonical_bytes(job)).hexdigest() != row[0]:
             raise ValueError("JOB_STORE_CORRUPT")
-        if (observed.get("attested") is not True or type(observed.get("chain_id")) is not int
+        synthetic_allowed = self.allow_synthetic and observed.get("synthetic") is True and observed.get("source_kind") == "SYNTHETIC"
+        if (observed.get("attested") is not True and not synthetic_allowed or type(observed.get("chain_id")) is not int
                 or observed["chain_id"] != 97 or observed.get("agent_id") != 2583
                 or address(observed["deployment"]) != self.contracts["commerce"]):
             raise ValueError("JOB_BINDING_STOP")
@@ -52,9 +56,14 @@ class AssessmentWorker:
             return existing
         if job["statusName"] != "FUNDED" or uint(job["expiredAt"]) <= now:
             raise ValueError("FUNDED_UNEXPIRED_JOB_REQUIRED")
-        task = json.loads(job["description"])
-        if isinstance(task.get("task"), str) and task["task"].startswith("{"):
-            task = json.loads(task["task"])
+        if observed.get("marketplace") == "pokter":
+            task = observed.get("assessment_task")
+            if not isinstance(task,dict) or task.get("marketplace") != "pokter" or task.get("agent_id") != 2583:
+                raise ValueError("POKTER_TASK_BINDING_REQUIRED")
+        else:
+            task = json.loads(job["description"])
+            if isinstance(task.get("task"), str) and task["task"].startswith("{"):
+                task = json.loads(task["task"])
         if task.get("task") != "assess_venus_position" or task.get("chain_id") != 97:
             raise ValueError("ASSESSMENT_TASK_REQUIRED")
         wallet = address(task["wallet"])

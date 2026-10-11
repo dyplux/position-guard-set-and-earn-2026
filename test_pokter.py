@@ -11,7 +11,7 @@ class PokterTests(unittest.TestCase):
         self.envelope={'protocol':'pokter-job','version':1,'identity':{'chainId':97,'tokenId':'2583'},
             'provider':PROVIDER,'category':'health-factor','task':self.task,
             'quote':{'negotiationHash':self.hash,'providerSignature':self.sig}}
-        self.job={'attested':True,'synthetic':True,'chain_id':97,'deployment':COMMERCE,
+        self.job={'attested':True,'synthetic':False,'source_kind':'OBSERVED','chain_id':97,'deployment':COMMERCE,
                   'job':{'statusName':'FUNDED','provider':PROVIDER,'budget':'100','description':json.dumps(self.envelope)}}
         self.quote={'verified_at_funding':True,'envelope':{'negotiation_hash':self.hash,'provider_sig':self.sig,
             'request':{'task_description':self.task},'chain_id':97,'verifying_contract':COMMERCE,
@@ -39,6 +39,12 @@ class PokterTests(unittest.TestCase):
             with self.assertRaises(ValueError):bind_pokter_job(bad,quote_lookup=lambda _:self.quote)
         self.job['job']['description']='not-json'
         with self.assertRaises(ValueError):bind_pokter_job(self.job,quote_lookup=lambda _:self.quote)
+
+    def test_synthetic_is_not_relabelled_as_public(self):
+        self.job.update(attested=False,synthetic=True,source_kind='SYNTHETIC',funding_verified=True)
+        with self.assertRaises(ValueError):bind_pokter_job(self.job,quote_lookup=lambda _:self.quote)
+        result=bind_pokter_job(self.job,quote_lookup=lambda _:self.quote,allow_synthetic=True)
+        self.assertEqual(result['task'],'assess_venus_position');self.assertFalse(self.job['attested'])
         self.job['attested']=False
         with self.assertRaises(ValueError):bind_pokter_job(self.job,quote_lookup=lambda _:self.quote)
 
