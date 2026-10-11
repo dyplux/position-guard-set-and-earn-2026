@@ -1,6 +1,7 @@
 """HTTP/A2A surface for the read-only Position Guard candidate."""
 import argparse
 import datetime as dt
+import hashlib
 import json
 import re
 import os
@@ -280,13 +281,18 @@ class Handler(BaseHTTPRequestHandler):
             return self.wfile.write(payload)
         if parsed.path in {"/.well-known/agent-card.json", "/a2a", "/a2a/.well-known/agent-card.json"}:
             public = self.server.public_origin
+            skills = [{"id": "assess_venus_position", "name": "Assess a Venus position",
+                "description": "Provide a public wallet address on chain 97; returns read-only evidence and a receipt.",
+                "tags": ["health-factor", "testnet", "read-only"], "examples": ["Assess wallet 0x..."]}]
+            if getattr(self.server, "negotiation_probe", False):
+                skills.append({"id": "negotiate", "name": "Check seller availability",
+                    "description": "Integration availability check. Paid quotes are disabled until fulfilment is authorized.",
+                    "tags": ["availability", "testnet", "read-only"]})
             return self.send_json(200, {"name": "Position Guard by Dyplux" if public else "Position Guard by Dyplux (local prototype)",
                 "description": "Read-only Venus Core testnet position assessment candidate. No signer or automatic repayment.",
                 "url": (public or "http://127.0.0.1:"+str(self.server.server_port))+"/a2a", "version": "0.2.0",
                 "protocolVersion": "0.3.0", "category": "health_factor", "defaultInputModes": ["text", "application/json"], "defaultOutputModes": ["text", "application/json"],
-                "capabilities": {"streaming": False}, "skills": [{"id": "assess_venus_position", "name": "Assess a Venus position",
-                    "description": "Provide a public wallet address on chain 97; returns read-only evidence and a receipt.",
-                    "tags": ["health-factor", "testnet", "read-only"], "examples": ["Assess wallet 0x..."]}]})
+                "capabilities": {"streaming": False}, "skills": skills})
         if parsed.path == "/api/case":
             name = parse_qs(parsed.query).get("name", [""])[0]
             if name not in {"review", "hold", "risk", "missing"}:
@@ -313,6 +319,17 @@ class Handler(BaseHTTPRequestHandler):
                     if len(data_parts) != 1 or not isinstance(data_parts[0], dict):
                         raise ValueError("SINGLE_DATA_PART_REQUIRED")
                     data = data_parts[0]
+                    if data.get("skill") == "negotiate" and getattr(self.server, "negotiation_probe", False):
+                        task = data.get("task_description")
+                        if type(task) is not str or not 0 < len(task) <= 2000:
+                            raise ValueError("BOUNDED_TASK_REQUIRED")
+                        digest = hashlib.sha256(task.encode()).hexdigest()
+                        # Only a hash is recorded for matching the marketplace's read-only probe.
+                        print("NEGOTIATION_PROBE task_sha256=" + digest, flush=True)
+                        return self.send_json(200, {"jsonrpc": "2.0", "id": payload.get("id"), "result": {
+                            "kind": "message", "messageId": digest[:24], "role": "agent", "parts": [{"kind": "data", "data": {
+                                "request": {"task_description": task}, "response": {"accepted": False, "reason": "PAID_SERVICE_NOT_READY"},
+                                "chain_id": 97, "authority": "NONE", "execution_enabled": False}}]}})
                     if data.get("skill") != "assess_venus_position":
                         return self.send_json(200, {"jsonrpc": "2.0", "id": payload.get("id"), "error": {
                             "code": -32601, "message": "Seller negotiation isn't enabled; assessment only"}})
@@ -343,6 +360,7 @@ def build_parser():
     parser.add_argument("--endpoint-timeout", type=int, default=30)
     parser.add_argument("--rate-limit", type=int, default=60, help="requests per direct peer per minute")
     parser.add_argument("--delivery-store", type=Path, help="Opt-in local database of consented public deliverables")
+    parser.add_argument("--negotiation-probe", action="store_true", help="Advertise availability negotiation; always declines paid offers")
     return parser
 
 
@@ -361,6 +379,7 @@ def main(argv=None):
                                args.max_inflight, args.request_timeout,
                                args.endpoint_timeout, args.rate_limit)
     server.delivery_store = args.delivery_store
+    server.negotiation_probe = args.negotiation_probe
     server.serve_forever()
 
 
