@@ -10,7 +10,8 @@ as lowercase `manifest_hex`. It verifies the paid job at its funding block and
 current state through two fixed public RPCs. Synthetic proof is rejected.
 
 The manifest must contain an observed, read-only policy receipt for the wallet
-in the signed task. The command rechecks the receipt against policy 0.2.0. A
+in the signed task, collected at or after the funded block. The command rechecks the
+receipt against policy 0.2.0 and preserves its original as-of block. A
 `NEED_EVIDENCE` outcome requires the signed quality terms to contain
 `NEED_EVIDENCE accepted`; storing that result doesn't establish service completion.
 The fixed public delivery URL must return the exact canonical bytes before

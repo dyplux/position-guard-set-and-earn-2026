@@ -16,7 +16,7 @@ function fixture(){
   envelope:{negotiation_hash:'0x'+'c'.repeat(64),request:{task_description:'Assess Venus wallet 0x'+'0'.repeat(39)+'1'}},
   manifest_hex:'0x'+bytes.toString('hex')};
  const observed={chain_id:97,deployment:BINDINGS.commerce,attested:true,synthetic:false,source_kind:'OBSERVED',
-  funding_verified:true,block_timestamp:now,job:{id:'7',provider:BINDINGS.provider,evaluator:router,hook:router,
+  funding_verified:true,funding:{block_timestamp:now,block_number:1},block_timestamp:now,job:{id:'7',provider:BINDINGS.provider,evaluator:router,hook:router,
    statusName:'FUNDED',budget:'100',expiredAt:String(now+900)}};
  const calls=[];
  const request=async(url,method,params)=>{
@@ -59,4 +59,10 @@ test('pending nonce, insufficient reserve and nonvoid simulation stop',async()=>
   };
   await assert.rejects(()=>preflight(f.input,f.options));
  }
+});
+test('a receipt collected before the funded hire cannot fulfil a new job',async()=>{
+ const f=fixture();f.observed.funding.block_timestamp=now+10;
+ f.observed.block_timestamp=now+10;f.observed.funding.block_number=2;f.options.clock=()=>now+10;
+ await assert.rejects(()=>preflight(f.input,f.options),/SNAPSHOT_BEFORE_HIRE_OR_FUTURE/);
+ assert.equal(f.calls.length,0);
 });

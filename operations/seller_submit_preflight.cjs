@@ -64,6 +64,10 @@ async function preflight(input,{approvedPacket=null,sealSha256,request=rpc,verif
   fundingTxHash:input.funding_tx_hash,urls:URLS});
  if(observed.attested!==true||observed.synthetic===true||observed.source_kind!=='OBSERVED'
    ||observed.funding_verified!==true||Math.abs(clock()-observed.block_timestamp)>60)throw Error('PUBLIC_FUNDED_PROOF_REQUIRED');
+ const snapshot=JSON.parse(bytes).response.content.normalized_snapshot,checked=Date.parse(snapshot.checked_at)/1000;
+ if(!Number.isSafeInteger(checked)||checked<observed.funding.block_timestamp-5||checked>clock()+5
+   ||snapshot.block_timestamp<observed.funding.block_timestamp-5
+   ||snapshot.block_number<observed.funding.block_number)throw Error('SNAPSHOT_BEFORE_HIRE_OR_FUTURE');
  const submission=prepareSubmission({job:observed,manifestBytes:bytes,now:clock()});
  if(!(await fetchBytes(submission.deliverable_url)).equals(bytes))throw Error('PUBLIC_DELIVERY_BYTES_STOP');
  const tx={...submission.tx};
