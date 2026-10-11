@@ -159,4 +159,4 @@ async function findFundingTx({jobId,envelope,url,request=rpc}){
  // Receipt/header verification, time window and second RPC checks happen in verifyFundedJob.
  return valid[0].transactionHash;
 }
-module.exports={SEAL,FUNDED_ABI,TRANSFER_ABI,validateReceipt,verifyFundedJob,findFundingTx};
+module.exports={SEAL,FUNDED_ABI,TRANSFER_ABI,validateReceipt,verifyFundedJob,findFundingTx,assertSeal};
