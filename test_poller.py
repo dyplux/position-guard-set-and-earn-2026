@@ -3,6 +3,9 @@ import os
 import sqlite3
 import tempfile
 import unittest
+from contextlib import redirect_stdout, redirect_stderr
+from io import StringIO
+from unittest.mock import patch
 from types import SimpleNamespace
 
 from marketplace.poller import (COMMERCE, PROVIDER, Poller, PollDB, ReorgStop,
@@ -124,6 +127,28 @@ class PollerTests(unittest.TestCase):
     def test_claimed_status_and_economic_worker_flags_are_not_success(self):
         p=Poller(self.state,"/usr/bin/node",runner=self.runner,run_job=lambda *a:{"status":"DELIVERABLE_PERSISTED"})
         p.db.initialize(1);self.assertEqual(p.once()["processed"],"RETRY");p.close()
+
+    def test_cli_preparation_is_explicit_and_does_not_enable_publication(self):
+        from marketplace.poller import main
+        from marketplace.fulfilment import prepare_fulfilment
+        args = ["--state-dir", self.state, "--node", "/usr/bin/node", "--start-block", "1"]
+        with patch("marketplace.poller.Poller") as factory, redirect_stdout(StringIO()):
+            factory.return_value.once.return_value = {"status": "WAIT_CONFIRMATIONS"}
+            self.assertEqual(main(args), 0)
+            self.assertNotIn("run_job", factory.call_args.kwargs)
+            self.assertEqual(main(args + ["--prepare-delivery"]), 0)
+            self.assertIs(factory.call_args.kwargs["run_job"], prepare_fulfilment)
+            factory.return_value.once.assert_called_with(process=True)
+
+    def test_cli_scan_only_and_preparation_cannot_be_combined(self):
+        from marketplace.poller import main
+        args = ["--state-dir", self.state, "--node", "/usr/bin/node", "--start-block", "1",
+                "--scan-only", "--prepare-delivery"]
+        with patch("marketplace.poller.Poller") as factory, redirect_stderr(StringIO()):
+            with self.assertRaises(SystemExit) as error:
+                main(args)
+            self.assertEqual(error.exception.code, 2)
+            factory.assert_not_called()
 
 
 if __name__ == "__main__":

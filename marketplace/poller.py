@@ -299,11 +299,18 @@ def main(argv=None):
     parser.add_argument("--node", required=True)
     parser.add_argument("--start-block", required=True, type=int)
     parser.add_argument("--once", action="store_true")
-    parser.add_argument("--scan-only", action="store_true", help="Record funded events without collecting positions")
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--scan-only", action="store_true", help="Record funded events without collecting positions")
+    modes.add_argument("--prepare-delivery", action="store_true",
+                       help="Prepare private delivery export metadata; never publish or submit")
     args = parser.parse_args(argv)
     poller = None
     try:
-        poller = Poller(args.state_dir, args.node)
+        if args.prepare_delivery:
+            from marketplace.fulfilment import prepare_fulfilment
+            poller = Poller(args.state_dir, args.node, run_job=prepare_fulfilment)
+        else:
+            poller = Poller(args.state_dir, args.node)
         poller.db.initialize(args.start_block)
         print(json.dumps(_safe(poller.once(process=not args.scan_only)), sort_keys=True, separators=(",", ":")))
         return 0
