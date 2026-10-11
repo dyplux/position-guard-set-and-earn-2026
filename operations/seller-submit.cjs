@@ -26,7 +26,7 @@ async function prepare(inputFile){
 }
 async function broadcast(raw){
  // Exactly one transport attempt; read_only/rpc never exposes this method.
- const response=await fetch(URLS[0],{method:'POST',headers:{'content-type':'application/json'},
+ const response=await fetch(URLS[0],{method:'POST',redirect:'error',headers:{'content-type':'application/json'},
   body:JSON.stringify({jsonrpc:'2.0',id:1,method:'eth_sendRawTransaction',params:[raw]}),signal:AbortSignal.timeout(15000)});
  if(!response.ok)throw Error('DISPATCH_HTTP_STOP');
  const chunks=[];let total=0;
