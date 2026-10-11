@@ -34,8 +34,9 @@ class PublicStoreTests(unittest.TestCase):
         self.store.db.rollback()
 
     def test_expiry_and_corrupt_bytes(self):
-        record = self.store.publish(KEY, b"manifest", expires_at=int(time.time()) + 1, quote_hash=QUOTE)
-        self.assertEqual(read_manifest_bytes(self.path, KEY, record["manifest_sha"], now=int(time.time())), b"manifest")
+        now = 2000000000
+        record = self.store.publish(KEY, b"manifest", expires_at=now + 1, quote_hash=QUOTE)
+        self.assertEqual(read_manifest_bytes(self.path, KEY, record["manifest_sha"], now=now), b"manifest")
         with self.assertRaises(ValueError):
             read_manifest_bytes(self.path, KEY, record["manifest_sha"], now=record["expires_at"])
         self.store.close()
