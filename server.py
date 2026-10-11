@@ -284,7 +284,11 @@ class Handler(BaseHTTPRequestHandler):
             skills = [{"id": "assess_venus_position", "name": "Assess a Venus position",
                 "description": "Provide a public wallet address on chain 97; returns read-only evidence and a receipt.",
                 "tags": ["health-factor", "testnet", "read-only"], "examples": ["Assess wallet 0x..."]}]
-            if getattr(self.server, "negotiation_probe", False):
+            if getattr(self.server, "preissued_negotiator", None) is not None:
+                skills.append({"id": "negotiate", "name": "Request a pre-issued assessment quote",
+                    "description": "Returns an operator-released signed quote for an exact assessment brief while it remains valid. No runtime signing or lending authority.",
+                    "tags": ["pre-issued", "testnet", "read-only"]})
+            elif getattr(self.server, "negotiation_probe", False):
                 skills.append({"id": "negotiate", "name": "Check seller availability",
                     "description": "Integration availability check. Paid quotes are disabled until fulfilment is authorized.",
                     "tags": ["availability", "testnet", "read-only"]})
@@ -319,6 +323,30 @@ class Handler(BaseHTTPRequestHandler):
                     if len(data_parts) != 1 or not isinstance(data_parts[0], dict):
                         raise ValueError("SINGLE_DATA_PART_REQUIRED")
                     data = data_parts[0]
+                    negotiator = getattr(self.server, "preissued_negotiator", None)
+                    if data.get("skill") == "negotiate" and negotiator is not None:
+                        envelope = None
+                        slot = getattr(self.server, "observation_slot", None)
+                        acquired = slot is not None and slot.acquire(blocking=False)
+                        if acquired:
+                            try:
+                                envelope = negotiator(data)
+                            except Exception:
+                                pass
+                            finally:
+                                slot.release()
+                        if envelope is None:
+                            echoed_task = data.get("task_description", "")
+                            if type(echoed_task) is not str or len(echoed_task) > 2000:
+                                echoed_task = ""
+                            envelope = {"request": {"task_description": echoed_task},
+                                "response": {"accepted": False, "reason": "PREISSUED_QUOTE_UNAVAILABLE"},
+                                "chain_id": 97, "authority": "NONE", "execution_enabled": False}
+                        digest = hashlib.sha256(json.dumps(envelope, sort_keys=True, ensure_ascii=True,
+                            separators=(",", ":")).encode()).hexdigest()
+                        return self.send_json(200, {"jsonrpc": "2.0", "id": payload.get("id"), "result": {
+                            "kind": "message", "messageId": digest[:24], "role": "agent",
+                            "parts": [{"kind": "data", "data": envelope}]}})
                     if data.get("skill") == "negotiate" and getattr(self.server, "negotiation_probe", False):
                         task = data.get("task_description")
                         if type(task) is not str or not 0 < len(task) <= 2000:
@@ -361,12 +389,18 @@ def build_parser():
     parser.add_argument("--rate-limit", type=int, default=60, help="requests per direct peer per minute")
     parser.add_argument("--delivery-store", type=Path, help="Opt-in local database of consented public deliverables")
     parser.add_argument("--negotiation-probe", action="store_true", help="Advertise availability negotiation; always declines paid offers")
+    parser.add_argument("--preissued-quote-file", type=Path, help="Opt-in operator-released signed quote; never signs")
+    parser.add_argument("--quote-verifier-node", help="Absolute Node executable for key-free quote verification")
     return parser
 
 
 def main(argv=None):
     parser = build_parser()
     args = parser.parse_args(argv)
+    if bool(args.preissued_quote_file) != bool(args.quote_verifier_node):
+        parser.error("preissued quote file and verifier node must be provided together")
+    if args.preissued_quote_file and args.negotiation_probe:
+        parser.error("availability probe and preissued quote modes are mutually exclusive")
     if not 1024 <= args.port <= 65535:
         parser.error("port outside local range")
     if not 1 <= args.max_inflight <= 64 or not 1 <= args.request_timeout <= 30:
@@ -380,6 +414,10 @@ def main(argv=None):
                                args.endpoint_timeout, args.rate_limit)
     server.delivery_store = args.delivery_store
     server.negotiation_probe = args.negotiation_probe
+    server.preissued_negotiator = None
+    if args.preissued_quote_file:
+        from marketplace.preissued import PreissuedNegotiator
+        server.preissued_negotiator = PreissuedNegotiator(args.preissued_quote_file, args.quote_verifier_node)
     server.serve_forever()
 
 

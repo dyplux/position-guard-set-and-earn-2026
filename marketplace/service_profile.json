@@ -1,0 +1,4 @@
+{
+  "deliverables": "A canonical JSON policy receipt for one public Venus Core testnet wallet, committed in an ERC-8183 manifest.",
+  "quality_standards": "As-of-block Venus Core chain 97 assessment. NEED_EVIDENCE accepted. Public JSON delivery retained for 45 days after the assessment. | Position Guard ERC-8004 97/2583; assess_venus_position; read-only"
+}
