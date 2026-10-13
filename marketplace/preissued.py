@@ -66,6 +66,24 @@ def _valid_terms(terms):
             or terms == {"deliverables": DELIVERABLES, "quality_standards": QUALITY})
 
 
+def _request_data(data):
+    """Validate optional Pokter settlement hints, then preserve the original request."""
+    base = {"skill", "task_description", "terms"}
+    hints = {"chain_id", "escrow_chains"}
+    if type(data) is not dict or set(data) not in (base, base | hints):
+        raise ValueError("request")
+    if set(data) == base | hints:
+        chains = data["escrow_chains"]
+        if (type(data["chain_id"]) is not int or data["chain_id"] != 97
+                or type(chains) is not list or not 1 <= len(chains) <= 2
+                or any(type(chain) is not int for chain in chains)
+                or len(set(chains)) != len(chains) or not set(chains) <= {56, 97}
+                or 97 not in chains):
+            raise ValueError("settlement hint")
+        return {key: data[key] for key in ("skill", "task_description", "terms")}
+    return data
+
+
 def _read_release(path):
     if not isinstance(path, str) or not os.path.isabs(path):
         raise ValueError("path")
@@ -114,8 +132,7 @@ class PreissuedNegotiator:
 
     def __call__(self, data):
         try:
-            if type(data) is not dict or set(data) != {"skill", "task_description", "terms"}:
-                raise ValueError("request")
+            data = _request_data(data)
             if data["skill"] != "negotiate" or not _valid_task(data["task_description"]):
                 raise ValueError("request")
             if not _valid_terms(data["terms"]):
