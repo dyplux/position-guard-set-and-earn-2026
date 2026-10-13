@@ -1,0 +1,95 @@
+{
+  "checked_at": "2026-10-13T23:24:36.794Z",
+  "evidence_kind": "OBSERVED",
+  "chain_id": 97,
+  "agent_id": 2583,
+  "job_id": 1444,
+  "scope": "INTERNAL_SELF_HIRE_NOT_AN_EXTERNAL_CUSTOMER",
+  "status": "COMPLETED",
+  "provider": "0xF9Ad22cAA6C179Eee86806FA10176e845ea8e982",
+  "client": "0xF9Ad22cAA6C179Eee86806FA10176e845ea8e982",
+  "price_testu": "0.1",
+  "quote_signature_count": 1,
+  "transaction_signature_count": 7,
+  "broadcast_count": 7,
+  "economic_retries_in_this_trial": 0,
+  "paid_delivery_decision": "NO_DEBT",
+  "paid_delivery_authority": "NONE",
+  "settlement_tx_hash": "0x67a6f9956ee578188c4fb26414c3729c31633f0f38258d87a477f796846d6f6b",
+  "settlement_block": 136635558,
+  "provider_payout_raw": "100000000000000000",
+  "minimum_confirmations": 12,
+  "observed_rpc_sources": [
+    "https://bsc-testnet-dataseed.bnbchain.org",
+    "https://bsc-testnet-rpc.publicnode.com"
+  ],
+  "current_deployment_seals": "PASS_BOTH_RPC",
+  "historical_deployment_seals": {
+    "official_rpc": "UNAVAILABLE_MISSING_TRIE_NODE",
+    "publicnode": "PASS"
+  },
+  "historical_validation_both_rpc": false,
+  "new_trial_total_gas_cost_wei": "284233850000000",
+  "transactions": [
+    {
+      "stage": "approval",
+      "tx_hash": "0xbba75d9ba71af8872d7740de4672162a140479e5a843c20e62c5fd357f3e7f81",
+      "block_hash": "0x52e2fce42033d057d2d0581f85e02c639bffc4a32922ca979af130fddaecbe91",
+      "gas_used": 60257,
+      "gas_price_wei": "200000000",
+      "gas_cost_wei": "12051400000000"
+    },
+    {
+      "stage": "create",
+      "tx_hash": "0x49c4dfcae2b7706bb9f2daf574673399184172644716e6f82685fecb9d133a87",
+      "block_hash": "0xf6a66b2185788083c2cb6ec261bbafc0fbd6aaea9998dab1891de170a33d5cda",
+      "gas_used": 766899,
+      "gas_price_wei": "200000000",
+      "gas_cost_wei": "153379800000000"
+    },
+    {
+      "stage": "register",
+      "tx_hash": "0x3008f358b839fb933519fc573d92b1a2f04f22a6b9b8fe2b39e1c32407612602",
+      "block_hash": "0x7ee67cd4eb4df96adb740ddae37ab1cece5addb3f158f39bf60c9f60fad266e3",
+      "gas_used": 147085,
+      "gas_price_wei": "200000000",
+      "gas_cost_wei": "29417000000000"
+    },
+    {
+      "stage": "budget",
+      "tx_hash": "0x0a7bf24e697dd4a89df40721e25dbcb3e8b316af08c4bdf48f76fc29c8f2393b",
+      "block_hash": "0x0d5729f401436110a19000c8a85880bbef117e7573566d5ee5517cd19b18f49d",
+      "gas_used": 96353,
+      "gas_price_wei": "200000000",
+      "gas_cost_wei": "19270600000000"
+    },
+    {
+      "stage": "fund",
+      "tx_hash": "0x02c2567ce6cdd012265b168f0bcdb0248c0f6115b2560d4bbe353f10138d2eac",
+      "block_hash": "0xe9733cb62e9aa01a940a650a557e37af8898ec100b2c12edcd6d4eaf87fe0a4b",
+      "gas_used": 105380,
+      "gas_price_wei": "200000000",
+      "gas_cost_wei": "21076000000000"
+    },
+    {
+      "stage": "submit",
+      "tx_hash": "0x9ac71bbfba2a70a3bc28296226ba5ff638d7f91a0e63de6bdecdfa9f54cf0d81",
+      "block_hash": "0x23d56f8544b04e361c0b255134afa80c5bee1d1c7990c1f750cf46f963ee5bae",
+      "gas_used": 203314,
+      "gas_price_wei": "125000000",
+      "gas_cost_wei": "25414250000000"
+    },
+    {
+      "stage": "settle",
+      "tx_hash": "0x67a6f9956ee578188c4fb26414c3729c31633f0f38258d87a477f796846d6f6b",
+      "block_hash": "0x8025b4228877ff64b15c716ec9864a224881592cc23e8f5c3c4fd4f14ebe5ac0",
+      "gas_used": 118124,
+      "gas_price_wei": "200000000",
+      "gas_cost_wei": "23624800000000"
+    }
+  ],
+  "deliverable_sha256": "7c28674803526117c3cc8a53d02790ace61488a4a7d1eca8b28ab12f1897f766",
+  "deliverable_url": "https://positionguard.dyplux.com/deliverables/erc8183:97:0xa206c0517b6371c6638cd9e4a42cc9f02a33b0de:1444/7c28674803526117c3cc8a53d02790ace61488a4a7d1eca8b28ab12f1897f766.json",
+  "external_customer_independence": "NOT_PROVEN",
+  "campaign_qualification": "NOT_CLAIMED"
+}

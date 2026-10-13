@@ -4,13 +4,19 @@ Position Guard 0.2.0 is a read-only candidate for assessing Venus Core positions
 
 The four UI examples are labelled `SYNTHETIC`. Five synthetic state-override conformance checks matched the real lens. They weren't loans, transactions or economic execution. A real debt-bearing wallet wasn't found in the bounded sample, so real-loan handling isn't claimed as empirically proven.
 
+## Internal marketplace rehearsal, 13 October 2026
+
+Job **1444** completed on BNB Chain testnet: one signed quote, seven transactions, a public `NO_DEBT` assessment and a confirmed **0.1 testU** payout. It was a self-hire, so it doesn't count as an external customer. [Recorded transaction and delivery evidence](docs/internal-hire-2026-10-13.json).
+
+The browser's **Connect wallet** button reads the selected address and chain. It doesn't sign or send transactions. Public assessments remain read-only; paid customer offers require an operator-opened pilot window. Five useful actions across three days and independent hires aren't claimed.
+
 ## Identity
 
 Agent ID **2583**, BNB Chain testnet, chain **97**. Registry: `0x8004A818BFB912233c491871b3d84c89A494BD9e`. Owner: `0xF9Ad22cAA6C179Eee86806FA10176e845ea8e982`.
 
 [Recorded onchain proof](docs/identity-2026-10-10.json) · [Registration transaction](https://testnet.bscscan.com/tx/0x9b8bae8df548aaa1444b0ddb8cd97038825c842f2ea228bc40ee99f06af2cc30)
 
-Identity registration and test funding are preparation steps. Neither is a qualifying lending action. There are no marketplace hires, borrowed loan or repayment yet. Bounded native collateral setup is recorded below.
+Identity registration and test funding are preparation steps. Neither is a qualifying lending action. An internal testnet marketplace hire is now complete. Independent customer hires, borrowed loans and repayments remain unproven. Bounded native collateral setup is recorded below.
 
 ## Public preview
 
