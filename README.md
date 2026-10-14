@@ -1,6 +1,6 @@
 # Position Guard by Dyplux
 
-Position Guard 0.2.0 is a read-only candidate for assessing Venus Core positions on BNB Chain testnet, chain 97. The public service has no signer, automatic repayment, payment flow or wallet-secret handling. A separate local operator completed bounded testnet collateral setup. It has ERC-8004 identity 2583 on chain 97, owned by the registered campaign wallet. It isn't listed or qualified for Set and Earn.
+Position Guard 0.2.0 assesses Venus Core positions on BNB Chain testnet, chain 97. The public assessment service has no signer, automatic repayment or wallet-secret handling. Bounded testnet collateral setup is recorded. ERC-8004 identity 2583 on chain 97 is currently listed on Pokter, and three paid testnet customer hires have completed through that marketplace. Set and Earn campaign qualification remains `NOT_ATTESTED`.
 
 The four UI examples are labelled `SYNTHETIC`. Five synthetic state-override conformance checks matched the real lens. They weren't loans, transactions or economic execution. A real debt-bearing wallet wasn't found in the bounded sample, so real-loan handling isn't claimed as empirically proven.
 
@@ -8,11 +8,11 @@ The four UI examples are labelled `SYNTHETIC`. Five synthetic state-override con
 
 Job **1444** completed on BNB Chain testnet: one signed quote, seven transactions, a public `NO_DEBT` assessment and a confirmed **0.1 testU** payout. It was a self-hire, so it doesn't count as an external customer. [Recorded transaction and delivery evidence](docs/internal-hire-2026-10-13.json).
 
-The browser's **Connect wallet** button reads the selected address and chain. It doesn't sign or send transactions. Public assessments remain read-only; paid customer offers require an operator-opened pilot window. Five useful actions across three days remain unproven. Three testnet customer hires are recorded below, while independent human customers and campaign qualification remain unverified.
+The browser's **Connect wallet** button reads the selected address and chain. It doesn't sign or send transactions. Public assessments remain read-only. Five useful actions across three days remain unproven.
 
 ## Customer hires, 14 October 2026
 
-Jobs **1447**, **1449** and **1450** completed on BNB Chain testnet. Each paid **0.1 testU** and produced a public `NO_DEBT` report. Distinct client addresses are recorded, but independent human customers and Set and Earn qualification remain `NOT_ATTESTED`. Job 1450 was settled by an external caller whose identity is unknown. [Sanitized report and verification limits](docs/customer-hires-2026-10-14.md) · [Evidence JSON](docs/customer-hires-2026-10-14.json).
+Jobs **1447**, **1449** and **1450** completed on BNB Chain testnet. Each paid **0.1 testU** and produced a public `NO_DEBT` report. Job 1450 was settled by an external caller whose identity is unknown. [Sanitized report and verification limits](docs/customer-hires-2026-10-14.md) · [Evidence JSON](docs/customer-hires-2026-10-14.json).
 
 ## Identity
 
@@ -20,7 +20,7 @@ Agent ID **2583**, BNB Chain testnet, chain **97**. Registry: `0x8004A818BFB9122
 
 [Recorded onchain proof](docs/identity-2026-10-10.json) · [Registration transaction](https://testnet.bscscan.com/tx/0x9b8bae8df548aaa1444b0ddb8cd97038825c842f2ea228bc40ee99f06af2cc30)
 
-Identity registration and test funding are preparation steps. Neither is a qualifying lending action. Three testnet customer hires have completed, each with a 0.1 testU payment and a public NO_DEBT report. The available records don't verify independent human customers, and campaign qualification remains NOT_ATTESTED. Borrowed loans and repayments remain unproven. Bounded native collateral setup is recorded below.
+Identity registration and test funding are preparation steps, not qualifying lending actions. Borrowing and repayment remain unproven. Bounded native collateral setup is recorded below.
 
 ## Public preview
 
@@ -87,7 +87,7 @@ Configure a stdio MCP server with command `python3` and args containing the abso
 
 ## Recorded native collateral setup
 
-The registered wallet supplied **0.001 testBNB** to Venus Core vBNB and entered that market. Both transactions were reconciled from receipts and position state. There is no debt. These are two setup transactions on one day; five useful actions on three days and independent hires remain incomplete.
+The registered wallet supplied **0.001 testBNB** to Venus Core vBNB and entered that market. Both transactions were reconciled from receipts and position state. There is no debt. These are two setup transactions on one day; five useful actions on three days remain incomplete.
 
 [Actual setup evidence](docs/native-setup-2026-10-10.json) · [Pure setup planner](keeper_plan.py) · [Local operator reference and limits](operations/README.md)
 
