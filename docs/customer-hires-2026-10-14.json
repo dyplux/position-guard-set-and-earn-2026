@@ -1,0 +1,52 @@
+{
+  "schema": "dyplux.position_guard.customer_hires.v1",
+  "checked_at": "2026-10-14T21:17:41.550059Z",
+  "network": "BNB Chain testnet",
+  "chain_id": 97,
+  "agent_id": 2583,
+  "job_count": 3,
+  "payment_each": "0.1 testU",
+  "decision": "NO_DEBT",
+  "public_retention_days": 45,
+  "qualification": "NOT_ATTESTED",
+  "independent_human_clients": "NOT_VERIFIED",
+  "historical_verification_limit": "No trie-authenticated historical state proof. Jobs 1449 and 1450 used one historical RPC source and two live RPC sources.",
+  "jobs": [
+    {
+      "job_id": 1447,
+      "status": "COMPLETED",
+      "payment": "0.1 testU",
+      "decision": "NO_DEBT",
+      "delivery_sha256": "7cf0fe317f1cd83ff58908203a43150bfa685bca90216defc24e3a770ddda286",
+      "delivery_url": "https://positionguard.dyplux.com/deliverables/erc8183:97:0xa206c0517b6371c6638cd9e4a42cc9f02a33b0de:1447/7cf0fe317f1cd83ff58908203a43150bfa685bca90216defc24e3a770ddda286.json",
+      "funding_tx": "0xc118b89b24c2602ddc3d7e2cc7ddd52c0c2fdbdc46815f057f3698bb500d81f8",
+      "submit_tx": "0xda044f8b2a112da16de12b088b440bae66da5ca6080a3c91bb6b41185be6f288",
+      "settle_tx": "0x35942cd00b714467dbfb1ee4e9599b0366aeeeac5a29b79cf4c5341a09c8f736",
+      "settlement": "Pokter reported settled; two RPCs and 12 confirmations recorded"
+    },
+    {
+      "job_id": 1449,
+      "status": "COMPLETED",
+      "payment": "0.1 testU",
+      "decision": "NO_DEBT",
+      "delivery_sha256": "31323ffbd8b2da1f1209610cf05c96a6dfadb2c1e7111bc492cd0f1b1193d326",
+      "delivery_url": "https://positionguard.dyplux.com/deliverables/erc8183:97:0xa206c0517b6371c6638cd9e4a42cc9f02a33b0de:1449/31323ffbd8b2da1f1209610cf05c96a6dfadb2c1e7111bc492cd0f1b1193d326.json",
+      "funding_tx": "0xa8dd687224c3523f80ff59334ee8f5c31eb3e7f57eb95085c1f743d89250131f",
+      "submit_tx": "0xbe1f6ef0b1165ff1558b2e8ad3e7ca0046fb754783b56b354ec4616ec30f772c",
+      "settle_tx": "0x3388880a21de21716fa070cbe21db7a2eabe06ec0be607b2b17e0ca38406e4ec",
+      "settlement": "Pokter reported settled; two RPCs and 12 confirmations recorded"
+    },
+    {
+      "job_id": 1450,
+      "status": "COMPLETED",
+      "payment": "0.1 testU",
+      "decision": "NO_DEBT",
+      "delivery_sha256": "5c7d5cfbfaeb10fc08caf4cca2e7fff03d3595d8c77992dd5045239e40c22fd2",
+      "delivery_url": "https://positionguard.dyplux.com/deliverables/erc8183:97:0xa206c0517b6371c6638cd9e4a42cc9f02a33b0de:1450/5c7d5cfbfaeb10fc08caf4cca2e7fff03d3595d8c77992dd5045239e40c22fd2.json",
+      "funding_tx": "0x88ee680d0e6d6d2599108d8852ee0a693e86e780656d90eb01797895014d41ff",
+      "submit_tx": "0xd35e00f68482762ecd3f8535c50d7393eb90f12009c3ad436dc4daf5aed48a4c",
+      "settle_tx": "0xd1a48a0afc5070af693bdccf13edb1cd7600cfe58db634f344c12ab81197fbce",
+      "settlement": "Settled by an external caller of unknown identity 914 seconds after submit; no provider settle signature or dispatch was recorded"
+    }
+  ]
+}

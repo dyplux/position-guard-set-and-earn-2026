@@ -8,7 +8,11 @@ The four UI examples are labelled `SYNTHETIC`. Five synthetic state-override con
 
 Job **1444** completed on BNB Chain testnet: one signed quote, seven transactions, a public `NO_DEBT` assessment and a confirmed **0.1 testU** payout. It was a self-hire, so it doesn't count as an external customer. [Recorded transaction and delivery evidence](docs/internal-hire-2026-10-13.json).
 
-The browser's **Connect wallet** button reads the selected address and chain. It doesn't sign or send transactions. Public assessments remain read-only; paid customer offers require an operator-opened pilot window. Five useful actions across three days and independent hires aren't claimed.
+The browser's **Connect wallet** button reads the selected address and chain. It doesn't sign or send transactions. Public assessments remain read-only; paid customer offers require an operator-opened pilot window. Five useful actions across three days remain unproven. Three testnet customer hires are recorded below, while independent human customers and campaign qualification remain unverified.
+
+## Customer hires, 14 October 2026
+
+Jobs **1447**, **1449** and **1450** completed on BNB Chain testnet. Each paid **0.1 testU** and produced a public `NO_DEBT` report. Distinct client addresses are recorded, but independent human customers and Set and Earn qualification remain `NOT_ATTESTED`. Job 1450 was settled by an external caller whose identity is unknown. [Sanitized report and verification limits](docs/customer-hires-2026-10-14.md) · [Evidence JSON](docs/customer-hires-2026-10-14.json).
 
 ## Identity
 
@@ -16,7 +20,7 @@ Agent ID **2583**, BNB Chain testnet, chain **97**. Registry: `0x8004A818BFB9122
 
 [Recorded onchain proof](docs/identity-2026-10-10.json) · [Registration transaction](https://testnet.bscscan.com/tx/0x9b8bae8df548aaa1444b0ddb8cd97038825c842f2ea228bc40ee99f06af2cc30)
 
-Identity registration and test funding are preparation steps. Neither is a qualifying lending action. An internal testnet marketplace hire is now complete. Independent customer hires, borrowed loans and repayments remain unproven. Bounded native collateral setup is recorded below.
+Identity registration and test funding are preparation steps. Neither is a qualifying lending action. Three testnet customer hires have completed, each with a 0.1 testU payment and a public NO_DEBT report. The available records don't verify independent human customers, and campaign qualification remains NOT_ATTESTED. Borrowed loans and repayments remain unproven. Bounded native collateral setup is recorded below.
 
 ## Public preview
 
