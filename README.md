@@ -2,7 +2,7 @@
 
 Position Guard 0.2.0 assesses Venus Core positions on BNB Chain testnet, chain 97. The public assessment service has no signer, automatic repayment or wallet-secret handling. Bounded testnet collateral setup is recorded. ERC-8004 identity 2583 on chain 97 is currently listed on Pokter, and three paid testnet customer hires have completed through that marketplace. Set and Earn campaign qualification remains `NOT_ATTESTED`.
 
-The four UI examples are labelled `SYNTHETIC`. Five synthetic state-override conformance checks matched the real lens. They weren't loans, transactions or economic execution. A real debt-bearing wallet wasn't found in the bounded sample, so real-loan handling isn't claimed as empirically proven.
+The four UI examples are labelled `SYNTHETIC`. Five synthetic state-override conformance checks matched the real lens. The original bounded Venus Core sample didn't establish real borrower handling. A separate F9 trial has now supplied **0.002 WBNB** and borrowed **0.0004 WBNB** in the Liquid Staked BNB pool on testnet97. [Five confirmed transactions and exact scope](docs/lst-trial-day1-2026-10-15.md). Repayment and the complete three-day loop remain unproven.
 
 ## Internal marketplace rehearsal, 13 October 2026
 
@@ -22,7 +22,7 @@ A separate read-only Core reader now handles the ten pinned legacy proxy getter 
 
 The Chainlink feed proxy executable is now reproduced from an earlier official source revision: **9,518 executable bytes match exactly**. Only the 32-byte IPFS metadata digest differs. [Source, compiler and comparison](docs/feed-proxy-source-2026-10-15.json). A recovery fix lets a funded emergency close use fresh debt and rate checks after the original wrap window expires; it never wraps twice or increases the finite caps. The public adapter still has no signer.
 
-The wrapped-native protection trial is prepared with a bounded reader, finite planner and emergency-exit drafts. Its financial path remains OFF until the execution and recovery gates pass. [The dated source comparison](docs/lst-source-comparison-2026-10-15.md) records the newly resolved source gaps and remaining metadata limitations. Five useful lending actions across three days remain NOT PROVEN. [Trial boundaries](maintenance/LST-TRIAL-README.md) · [Read-only execution and recovery adapter](maintenance/LST-INTEGRATION.md).
+The public service and adapter remain read-only and have no signer. A separate local operator completed day 1 of the bounded F9/97 protection trial on 15 October: supply and borrow, five transactions, no economic retry. It retained the 0.001 testBNB aggregate gas cap and 0.01 reserve. [The dated source comparison](docs/lst-source-comparison-2026-10-15.md) records source scope and metadata limits. Five useful lending actions across three days remain NOT PROVEN. [Trial boundaries](maintenance/LST-TRIAL-README.md) · [Read-only execution and recovery adapter](maintenance/LST-INTEGRATION.md).
 
 ## Identity
 
@@ -30,7 +30,7 @@ Agent ID **2583**, BNB Chain testnet, chain **97**. Registry: `0x8004A818BFB9122
 
 [Recorded onchain proof](docs/identity-2026-10-10.json) · [Registration transaction](https://testnet.bscscan.com/tx/0x9b8bae8df548aaa1444b0ddb8cd97038825c842f2ea228bc40ee99f06af2cc30)
 
-Identity registration and test funding are preparation steps, not qualifying lending actions. Borrowing and repayment remain unproven. Bounded native collateral setup is recorded below.
+Identity registration and test funding are preparation steps. The separate LST trial proves supply and borrow; repayment remains unproven. The earlier Venus Core collateral setup is recorded below.
 
 ## Public preview
 
@@ -97,7 +97,7 @@ Configure a stdio MCP server with command `python3` and args containing the abso
 
 ## Recorded native collateral setup
 
-The registered wallet supplied **0.001 testBNB** to Venus Core vBNB and entered that market. Both transactions were reconciled from receipts and position state. There is no debt. These are two setup transactions on one day; five useful actions on three days remain incomplete.
+The registered wallet supplied **0.001 testBNB** to Venus Core vBNB and entered that market. Both transactions were reconciled from receipts and position state. That dated Core setup had no debt; it is separate from the later LST loan. These are two setup transactions on one day; five useful actions on three days remain incomplete.
 
 [Actual setup evidence](docs/native-setup-2026-10-10.json) · [Pure setup planner](keeper_plan.py) · [Local operator reference and limits](operations/README.md)
 

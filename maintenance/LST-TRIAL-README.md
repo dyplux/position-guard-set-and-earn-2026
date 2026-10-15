@@ -1,4 +1,12 @@
-# Wrapped-native LST preparation
+# Wrapped-native LST trial
+
+## Live checkpoint, 15 October 2026
+
+A separate local operator supplied 0.002 WBNB and borrowed 0.0004 WBNB on testnet97, with five confirmed transactions and no economic retry. [Day-1 receipts and boundaries](../docs/lst-trial-day1-2026-10-15.md). The public modules below remain unsigned and read-only. Repayment and five useful actions across three days remain unproven.
+
+The initial 500,000-gas mint simulation failed before signing. The reviewed private resource envelope used 650,000 for the five market stages, within the actor's existing 1,000,000 ceiling. Both RPCs estimated the mint at 503,843. The 12-stage maximum is 4,225,000 gas at 0.2 gwei, 0.000845 testBNB, below the unchanged 0.001 aggregate cap. This is a resource bound, not a promise that future simulations pass.
+
+## Original unsigned preparation
 
 This slice contains a bounded read-only collector and a pure unsigned planner. It has no signer, key loader, grant issuer, scheduler or dispatch. Every planner result has `financial_ready=false`. At this planner's original preparation checkpoint, the PSR and reward0 sources weren't bound. The later source checkpoint below records their resolution. No seed transaction is recorded in this preparation package.
 
@@ -25,7 +33,7 @@ Measured exchange-rate/source truncation determines actual ratios. Oracle source
 
 The source clamps ERC20 repayment to accrued debt before `transferFrom`; excess WBNB stays in F9's wallet and unused allowance must be revoked. Finite close/headroom doesn't guarantee zero debt at inclusion. Redeeming exact seed can leave yield/vToken dust; capped unwrap can leave WBNB residue. No full-cleanup claim.
 
-The five action receipts omit support transactions from their fee subtotal. `fee_ledger_complete=false`: an actual adapter must reconcile **every transaction's fee**, reserve emergency gas, and enforce the 0.001 aggregate before any financial use. Maximum listed template gas is 3,655,000 at 0.2 gwei, 0.000731 native, subject to fresh estimates and the reviewed adapter.
+The five action receipts omit support transactions from their fee subtotal. `fee_ledger_complete=false`: an actual adapter must reconcile **every transaction's fee**, reserve emergency gas, and enforce the 0.001 aggregate before any financial use. The original unsigned template listed 3,655,000 gas including optional market exit, 0.000731 native at 0.2 gwei. That dated preparation subtotal is separate from the current 12-stage resource envelope above: 4,225,000 gas, 0.000845 testBNB, with fresh simulations and the unchanged 0.001 aggregate cap.
 
 Focused tests: `npm ci --prefix read_only --ignore-scripts`, then `node --test test_lst_reader.cjs test_lst_trial.cjs`. No actions or counts are guaranteed; wrapping and approvals aren't useful-action claims.
 
