@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-15T00:59:24.241000+00:00",
+  "chain_id": 97,
+  "campaign_wallet": "0xF9Ad22cAA6C179Eee86806FA10176e845ea8e982",
+  "distinct_agents": [
+    2554,
+    2555,
+    2556
+  ],
+  "marketplaces": [
+    "Pokter",
+    "HelloFugu"
+  ],
+  "F9_signatures": 11,
+  "F9_broadcasts": 11,
+  "economic_retries": 0,
+  "hires": [
+    {
+      "marketplace": "Pokter",
+      "agent_id": 2554,
+      "job_id": 1451,
+      "status": "COMPLETED",
+      "payment_raw": "100000000000000000",
+      "payment_token": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+      "funding_tx": "0x6329e14c60a24f89d4fd022a4057828fda1653c2f89502d86d17f201ca29c67c",
+      "completion_tx": "0xca31d4894ec0883d690b2a738d28534b4660f565e1d82c2db8c1b690c567e5fa",
+      "completion_block": "0x828047f",
+      "completion_timestamp": "1792025129",
+      "token_payout_verified_two_rpc": true,
+      "delivery_commitment_bytes_match": true,
+      "task_fulfilment": "PARTIAL",
+      "provider_financial_data": "SELF_REPORTED_NOT_INDEPENDENTLY_VERIFIED"
+    },
+    {
+      "marketplace": "Pokter",
+      "agent_id": 2555,
+      "job_id": 1452,
+      "status": "COMPLETED",
+      "payment_raw": "100000000000000000",
+      "payment_token": "0xc70B8741B8B07A6d61E54fd4B20f22Fa648E5565",
+      "funding_tx": "0x803e22c7cbfb2879f298f768ed82d9a8052377a4d7bbd42cc554dd78d1794997",
+      "completion_tx": "0x5e229088e57285fb533ba7681f9a59ac784572f8376ffd69e988247b83ca6295",
+      "completion_block": "0x8280730",
+      "completion_timestamp": "1792025439",
+      "token_payout_verified_two_rpc": true,
+      "delivery_commitment_bytes_match": true,
+      "task_fulfilment": "PARTIAL",
+      "provider_financial_data": "SELF_REPORTED_NOT_INDEPENDENTLY_VERIFIED"
+    },
+    {
+      "marketplace": "HelloFugu",
+      "agent_id": 2556,
+      "listing_id": 25,
+      "subscription_id": 23,
+      "status": "SUBSCRIPTION_EVENT_CONFIRMED",
+      "payment_native_wei": "68543332855129",
+      "funding_tx": "0xc2e78d305848f71bafe4ec3831ba934d1228bf5fa862de975c7d68d8314e6d73",
+      "marketplace_agent_link": "CONFIRMED",
+      "specific_paid_report_link": "UNKNOWN"
+    }
+  ],
+  "campaign_qualification": "NOT_ATTESTED"
+}

@@ -4,6 +4,8 @@ This module is an unsigned local policy check only.  It is not cryptographic
 authorization and never signs, submits, or otherwise authorizes a transaction.
 """
 
+from __future__ import annotations
+
 from dataclasses import dataclass
 import re
 
@@ -29,6 +31,8 @@ class Mandate:
     max_gas_wei: int
     reserve_wei: int
     expires_at: int
+    native_market: str | None = None
+    units: str | None = None
 
 
 def _int(value: object, name: str) -> int:

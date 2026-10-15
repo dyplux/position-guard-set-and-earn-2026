@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-10-14T23:33:24.000Z",
+  "block_number": "136830691",
+  "block_hash": "0x731f3cdfceb6a9f6d283947aafbac1890b972affad8b82058d5e8057b05f386d",
+  "policy_scope": "READ_ONLY_CORE_GETTER_COMPATIBILITY",
+  "markets": 49,
+  "observed_snapshots": 49,
+  "legacy_canonical_inner_snapshots": 10,
+  "unknown_snapshots": 0,
+  "effective_native_price_source": "DIRECT_OVERRIDE_WITHOUT_TIMESTAMP",
+  "effective_native_price_updated_at": null,
+  "oracle_freshness": "UNKNOWN",
+  "financial_ready": false,
+  "source_reference": {
+    "proxy_commit": "786751084f6a45161d66dd2f600d7a0c5c76eb95",
+    "implementation_commit": "46afc66b1dbd61a707d0a3492b3ec21bf90fc17a",
+    "implementation_runtime_sha256": "2359bce83d9f956f4e31177d0433d561d97e4ff571b0fa13f864e66f828100da"
+  },
+  "limitations": [
+    "Canonical double encoding is accepted only for the ten pinned legacy proxy profiles. Arbitrary prefix or padding trimming is rejected.",
+    "Source matching covers getter compatibility, not a complete financial-path audit.",
+    "The effective manual oracle override has no timestamp. Freshness stays UNKNOWN."
+  ]
+}

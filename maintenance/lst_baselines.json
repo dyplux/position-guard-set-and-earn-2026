@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "scope": "PUBLIC_PORTABLE_CONTENT_BASELINES_NOT_FINANCIAL_SOURCE_CLOSURE",
+  "public_baseline": "f9fcd8a0bd6af92acf8dadaaab9162190234d55d",
+  "planner_baseline": "e142fe10fb644a052abaf19311ded3aec9ca3cc7",
+  "files": {
+    "maintenance/lst_reader.cjs": {
+      "sha256": "ef36d2a627a81594c3a9b8963075120fff7699f842237356b6d957f11073d00d",
+      "original_sha256": "ef36d2a627a81594c3a9b8963075120fff7699f842237356b6d957f11073d00d",
+      "adaptation": "NONE_EXACT_COPY"
+    },
+    "maintenance/lst_trial.cjs": {
+      "sha256": "dbb0419f4e151b5c22b3cf553163f3602455d458a609cbe02de0f65c13e9f515",
+      "original_sha256": "dbb0419f4e151b5c22b3cf553163f3602455d458a609cbe02de0f65c13e9f515",
+      "adaptation": "NONE_EXACT_COPY"
+    },
+    "maintenance/lst_wire.cjs": {
+      "sha256": "96a41d422da2262cd1295ce633c97e4fe6ea5d64d8bdbf441be9d3ac70e3f8e9",
+      "original_sha256": "96a41d422da2262cd1295ce633c97e4fe6ea5d64d8bdbf441be9d3ac70e3f8e9",
+      "adaptation": "NONE_EXACT_COPY"
+    },
+    "maintenance/lst_actor_core.cjs": {
+      "sha256": "8bd2b123a7309fc53bfa29d55bb9e2fcc6b6882db5f2926000f8d4ddab9f2990",
+      "original_sha256": "a51e13a5299babbc08c6a3069143de68bde59fdb816805ff9266a6b62ad14e0f",
+      "adaptation": "RELATIVE_PUBLIC_CODEC_RPC_AND_BUNDLED_PURE_CANONICAL_PRIVATE_IO_HELPERS"
+    },
+    "maintenance/lst_canonical.cjs": {
+      "sha256": "a36894a71b76844592731c1905ffd2658daf232b38b218c3bcd0b5028a62b004",
+      "adaptation": "NEW_SELF_CONTAINED_ADAPTER_OR_PUBLIC_BASELINE_HELPER"
+    },
+    "maintenance/lst_actor_io.cjs": {
+      "sha256": "4a27bca86fe210f3a1ba76aea1a1b648201f953ede23519dfd1a62d9d123c46a",
+      "adaptation": "NEW_SELF_CONTAINED_ADAPTER_OR_PUBLIC_BASELINE_HELPER"
+    },
+    "maintenance/lst_integration.cjs": {
+      "sha256": "d13dd2d7b055dbad434f18a92ec9632dc04f910e0d656f8a6c6fa6b6424bbce2",
+      "adaptation": "PUBLIC_NO_SIGNER_CONTENT_ONLY_PERMISSIONS_CHECKED_BY_PRIVATE_OPERATOR_SEPARATELY"
+    },
+    "maintenance/lst_live_adapter.cjs": {
+      "sha256": "c4654f6ced114914496c60827fa251dabffc10ddc477e4e9062bbbe96946dc05",
+      "adaptation": "NEW_SELF_CONTAINED_ADAPTER_OR_PUBLIC_BASELINE_HELPER"
+    },
+    "read_only/rpc.cjs": {
+      "sha256": "eaca7db3d7cbdc8a8fe7d68910aab6f70b3fac2b45a6533dc435e9f253b43fef",
+      "adaptation": "NEW_SELF_CONTAINED_ADAPTER_OR_PUBLIC_BASELINE_HELPER"
+    },
+    "read_only/codec.cjs": {
+      "sha256": "1022aef031f4d42b08b2734975e7205bb13c0183e5a1a1289b47fd062c72b7ef",
+      "adaptation": "NEW_SELF_CONTAINED_ADAPTER_OR_PUBLIC_BASELINE_HELPER"
+    }
+  },
+  "package_closure_verified": false,
+  "trusted_financial_source_anchor": null
+}

@@ -14,6 +14,14 @@ The browser's **Connect wallet** button reads the selected address and chain. It
 
 Jobs **1447**, **1449** and **1450** completed on BNB Chain testnet. Each paid **0.1 testU** and produced a public `NO_DEBT` report. Job 1450 was settled by an external caller whose identity is unknown. [Sanitized report and verification limits](docs/customer-hires-2026-10-14.md) · [Evidence JSON](docs/customer-hires-2026-10-14.json).
 
+## Current evidence, 15 October 2026
+
+The registered wallet hired **three other agents across Pokter and HelloFugu**. Both Pokter jobs completed, with token payouts verified through two RPC providers. The HelloFugu subscription event is confirmed; its specific paid-report linkage remains UNKNOWN. [Outgoing hire evidence](docs/outgoing-hires-2026-10-15.md).
+
+A separate read-only Core reader now handles the ten pinned legacy proxy getter encodings. The recorded observation has **49/49 complete account snapshots**. The effective native oracle override has no timestamp, so freshness remains UNKNOWN. This doesn't enable automatic financial maintenance. [Recorded getter evidence](docs/core-getter-compatibility-2026-10-15.json) · [Maintenance modules](maintenance/README.md).
+
+The wrapped-native protection trial is prepared with a bounded reader, finite planner and emergency-exit drafts. Its financial path remains OFF until the execution and recovery gates pass. [The dated source comparison](docs/lst-source-comparison-2026-10-15.md) records the newly resolved source gaps and remaining metadata limitations. Five useful lending actions across three days remain NOT PROVEN. [Trial boundaries](maintenance/LST-TRIAL-README.md) · [Read-only execution and recovery adapter](maintenance/LST-INTEGRATION.md).
+
 ## Identity
 
 Agent ID **2583**, BNB Chain testnet, chain **97**. Registry: `0x8004A818BFB912233c491871b3d84c89A494BD9e`. Owner: `0xF9Ad22cAA6C179Eee86806FA10176e845ea8e982`.
