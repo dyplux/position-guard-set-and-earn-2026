@@ -33,7 +33,7 @@
       "adaptation": "NEW_SELF_CONTAINED_ADAPTER_OR_PUBLIC_BASELINE_HELPER"
     },
     "maintenance/lst_integration.cjs": {
-      "sha256": "d13dd2d7b055dbad434f18a92ec9632dc04f910e0d656f8a6c6fa6b6424bbce2",
+      "sha256": "a7d782b1f0b8cfd1dd035b78930fb3344b575d442b5b09a37fc9164cc3476eeb",
       "adaptation": "PUBLIC_NO_SIGNER_CONTENT_ONLY_PERMISSIONS_CHECKED_BY_PRIVATE_OPERATOR_SEPARATELY"
     },
     "maintenance/lst_live_adapter.cjs": {

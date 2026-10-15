@@ -1,0 +1,107 @@
+{
+  "checked_at": "2026-10-15T10:40:04.195561+00:00",
+  "status": "PASS_EXECUTABLE_EXACT_WITH_METADATA_IPFS_DIFFERENCE",
+  "scope": "Feed proxy executable source identity only. No financial authorization or end-to-end operator readiness implied.",
+  "address": "0x2514895c72f50D8bd4B4F9b1110F0D6bD2c97526",
+  "chain_id": 97,
+  "method": "Official GitHub file history identified pre-warning-fix source; pinned compiler standard JSON; direct executable byte equality at both declared CBOR boundaries; two RPC stable block quorum.",
+  "source_commit": "ead2121a4c68f9d060c3675eb29fd688dffe0f24",
+  "source_pins": [
+    {
+      "name": "EACAggregatorProxy.sol",
+      "url": "https://raw.githubusercontent.com/smartcontractkit/chainlink/ead2121a4c68f9d060c3675eb29fd688dffe0f24/evm-contracts/src/v0.6/EACAggregatorProxy.sol",
+      "sha256": "1895b698ad5eb0369bb5ba9881dcacb8ad8be53bcf2ab7033b1c0bfff1286af2",
+      "checked_at": "2026-10-15T10:38:41.721728+00:00"
+    },
+    {
+      "name": "AggregatorProxy.sol",
+      "url": "https://raw.githubusercontent.com/smartcontractkit/chainlink/ead2121a4c68f9d060c3675eb29fd688dffe0f24/evm-contracts/src/v0.6/AggregatorProxy.sol",
+      "sha256": "89cfdf59a5b89ed095e6e2c8f4486bedb25955ff35091dd36e9abfb91dfa35b2",
+      "checked_at": "2026-10-15T10:38:41.728007+00:00"
+    },
+    {
+      "name": "Owned.sol",
+      "url": "https://raw.githubusercontent.com/smartcontractkit/chainlink/ead2121a4c68f9d060c3675eb29fd688dffe0f24/evm-contracts/src/v0.6/Owned.sol",
+      "sha256": "ee1cde035a0c97078ffca6748c0b9ca077c513f3f5edb6c2f4f6ee3e50d85637",
+      "checked_at": "2026-10-15T10:38:42.007311+00:00"
+    },
+    {
+      "name": "interfaces/AggregatorV2V3Interface.sol",
+      "url": "https://raw.githubusercontent.com/smartcontractkit/chainlink/ead2121a4c68f9d060c3675eb29fd688dffe0f24/evm-contracts/src/v0.6/interfaces/AggregatorV2V3Interface.sol",
+      "sha256": "bedfe9ddfd3350622ea94ead130b16f8696ac0e8bb1400606bcd1b2b5e9be624",
+      "checked_at": "2026-10-15T10:38:41.995877+00:00"
+    },
+    {
+      "name": "interfaces/AggregatorInterface.sol",
+      "url": "https://raw.githubusercontent.com/smartcontractkit/chainlink/ead2121a4c68f9d060c3675eb29fd688dffe0f24/evm-contracts/src/v0.6/interfaces/AggregatorInterface.sol",
+      "sha256": "e961bc6f525861f63eae3aadda76a7b4c8225026179e1ec8c5e20619c93445a5",
+      "checked_at": "2026-10-15T10:38:42.306286+00:00"
+    },
+    {
+      "name": "interfaces/AggregatorV3Interface.sol",
+      "url": "https://raw.githubusercontent.com/smartcontractkit/chainlink/ead2121a4c68f9d060c3675eb29fd688dffe0f24/evm-contracts/src/v0.6/interfaces/AggregatorV3Interface.sol",
+      "sha256": "89eca89254616d2fe2a909d9c001e0c7964a9faffdf79bc5a45c5ef46b467f3c",
+      "checked_at": "2026-10-15T10:38:42.296459+00:00"
+    },
+    {
+      "name": "interfaces/AccessControllerInterface.sol",
+      "url": "https://raw.githubusercontent.com/smartcontractkit/chainlink/ead2121a4c68f9d060c3675eb29fd688dffe0f24/evm-contracts/src/v0.6/interfaces/AccessControllerInterface.sol",
+      "sha256": "bf7f87410ff614d4b9d7b54a0d859037d9c32de51a1eac4701fc71498207fca1",
+      "checked_at": "2026-10-15T10:38:42.589448+00:00"
+    }
+  ],
+  "compiler": {
+    "url": "https://raw.githubusercontent.com/ethereum/solc-bin/gh-pages/bin/soljson-v0.6.6+commit.6c089d02.js",
+    "sha256": "09f6098026622c5c334c7798c3ad2b8f7c0ebc62f87846c7d5e7e725c3d1cbc2",
+    "checked_at": "2026-10-15T10:37:23.149180+00:00"
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 1000000
+    },
+    "evmVersion": "istanbul",
+    "metadata": {
+      "bytecodeHash": "ipfs",
+      "useLiteralContent": true
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "metadata",
+          "evm.bytecode.object",
+          "evm.deployedBytecode"
+        ]
+      }
+    }
+  },
+  "runtime": {
+    "bytes": 9571,
+    "target_sha256": "53ca1c4d67c7b092f36c66e575874226de7e8eaada554f445f43fe2779743ec1",
+    "compiled_sha256": "a90fe8e2cd5fab5fcd2bd9a77e346cf0247ab59b3e48866bb4973463a915a86a",
+    "full_runtime_exact": false,
+    "executable_bytes": 9518,
+    "executable_sha256": "48a766c92e3701804de961e6717e40cf943255fba89524e228f6a929a1d89a35",
+    "executable_exact": true,
+    "immutable_references": {},
+    "link_references": {}
+  },
+  "metadata": {
+    "declared_cbor_bytes": 51,
+    "length_suffix_hex": "0033",
+    "total_trailer_bytes": 53,
+    "compiler_version_bytes": "000606",
+    "only_difference": "32-byte IPFS digest at byte offsets 9528 through 9559 inclusive",
+    "differing_byte_count": 32,
+    "observed_ipfs_digest": "c6148a0e63011d3b8b4f67078be31115256b163e26351db6fe3b70d7faf433f9",
+    "compiled_ipfs_digest": "d000f6a97624c11e08fa1e9da37c3b4632277c10a1847bb2a0a413cff490f946",
+    "observed_metadata_CID": "QmbfsbgQwvkxffBBy2cMzfuxUZBauJkT7CGMa39y2dGv6k",
+    "original_metadata_recovered": false,
+    "original_compile_settings_recovered": false,
+    "limitation": "These settings prove exact executable equivalence. They are not asserted to be the original deployment settings. Original metadata and its source URL/CID representation remain unavailable."
+  },
+  "explanation_of_previous_46_byte_gap": "Post-warning-fix AggregatorProxy reuses named return variables in getRoundData/latestRoundData. Earlier official source declares tuple locals and ansIn; three internal helpers are view instead of pure. No source alteration was used.",
+  "financial_authority": false,
+  "financial_execution_proven_by_this_file": false
+}

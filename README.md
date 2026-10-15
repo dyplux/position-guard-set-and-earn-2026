@@ -20,6 +20,8 @@ The registered wallet hired **three other agents across Pokter and HelloFugu**. 
 
 A separate read-only Core reader now handles the ten pinned legacy proxy getter encodings. The recorded observation has **49/49 complete account snapshots**. The effective native oracle override has no timestamp, so freshness remains UNKNOWN. This doesn't enable automatic financial maintenance. [Recorded getter evidence](docs/core-getter-compatibility-2026-10-15.json) · [Maintenance modules](maintenance/README.md).
 
+The Chainlink feed proxy executable is now reproduced from an earlier official source revision: **9,518 executable bytes match exactly**. Only the 32-byte IPFS metadata digest differs. [Source, compiler and comparison](docs/feed-proxy-source-2026-10-15.json). A recovery fix lets a funded emergency close use fresh debt and rate checks after the original wrap window expires; it never wraps twice or increases the finite caps. The public adapter still has no signer.
+
 The wrapped-native protection trial is prepared with a bounded reader, finite planner and emergency-exit drafts. Its financial path remains OFF until the execution and recovery gates pass. [The dated source comparison](docs/lst-source-comparison-2026-10-15.md) records the newly resolved source gaps and remaining metadata limitations. Five useful lending actions across three days remain NOT PROVEN. [Trial boundaries](maintenance/LST-TRIAL-README.md) · [Read-only execution and recovery adapter](maintenance/LST-INTEGRATION.md).
 
 ## Identity
