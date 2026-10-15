@@ -1,6 +1,6 @@
 # Wrapped-native LST preparation
 
-This slice contains a bounded read-only collector and a pure unsigned planner. It has no signer, key loader, grant issuer, scheduler or dispatch. Every planner result has `financial_ready=false`. Current active PSR and reward0 sources aren't bound; seed remains zero.
+This slice contains a bounded read-only collector and a pure unsigned planner. It has no signer, key loader, grant issuer, scheduler or dispatch. Every planner result has `financial_ready=false`. At this planner's original preparation checkpoint, the PSR and reward0 sources weren't bound. The later source checkpoint below records their resolution. No seed transaction is recorded in this preparation package.
 
 ## Fixed scope and choices
 
@@ -27,7 +27,7 @@ The source clamps ERC20 repayment to accrued debt before `transferFrom`; excess 
 
 The five action receipts omit support transactions from their fee subtotal. `fee_ledger_complete=false`: an actual adapter must reconcile **every transaction's fee**, reserve emergency gas, and enforce the 0.001 aggregate before any financial use. Maximum listed template gas is 3,655,000 at 0.2 gwei, 0.000731 native, subject to fresh estimates and the reviewed adapter.
 
-Focused tests: `NODE_PATH=<reviewed viem dependencies> node --test test_lst_reader.cjs test_lst_trial.cjs`. No actions or counts are guaranteed; wrapping and approvals aren't useful-action claims.
+Focused tests: `npm ci --prefix read_only --ignore-scripts`, then `node --test test_lst_reader.cjs test_lst_trial.cjs`. No actions or counts are guaranteed; wrapping and approvals aren't useful-action claims.
 
 ## Later source checkpoint
 
