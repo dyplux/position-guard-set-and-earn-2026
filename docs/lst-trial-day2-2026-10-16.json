@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-16T14:42:33.175Z",
+  "scope": "F9 TESTNET97 ONE FINITE WRAPPED-NATIVE PROTECTION TRIAL",
+  "status": "DAY2_PARTIAL_REPAYMENT_CONFIRMED",
+  "chain_id": 97,
+  "owner": "0xF9Ad22cAA6C179Eee86806FA10176e845ea8e982",
+  "market": "0x231dED0Dfc99634e52EE1a1329586bc970d773b3",
+  "controller": "0x596B11acAACF03217287939f88d63b51d3771704",
+  "wrapped_asset": "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+  "profile_variant": "FUNCTIONAL_TRIAL",
+  "profile_sha256": "d8da920939a7fc2939d15b3bfd166341cccd8af5cdf36eeea1ee65b6e07f03e4",
+  "private_execution_source_sha256": "675765b93c8a7bb7e4e07803d00178d0307c90eee89ad36aed9f749f777c2b2b",
+  "actor_baseline_sha256": "d125b1d5892874207e6d89e70a22a0608892b13c165aa2967a2f53d163ce2c83",
+  "supply_raw": "2000000000000000",
+  "borrow_raw": "400000000000000",
+  "partial_repayment_raw": "151041691845438",
+  "transactions": [
+    {
+      "stage": "WRAP",
+      "transaction_hash": "0xf69b5bd0f0944acd36aa4b4a69df3ce70160e959e6f1d5e81f9ecb3bd281930a",
+      "nonce": 39,
+      "amount_raw": "2000000000000000",
+      "fee_wei": "9007600000000",
+      "block_number": "136922000",
+      "timestamp_utc": "2026-10-15T10:58:24.000Z",
+      "status": "CONFIRMED",
+      "confirmations_at_capture": [
+        "4111",
+        "4113"
+      ]
+    },
+    {
+      "stage": "APPROVE_SEED",
+      "transaction_hash": "0x9fa503891a6461bcbd84f13ae0bd51c9ef7a7831400c8d36a57db55bf57b0d0f",
+      "nonce": 40,
+      "amount_raw": "2000000000000000",
+      "fee_wei": "9208000000000",
+      "block_number": "136926471",
+      "timestamp_utc": "2026-10-15T11:31:56.000Z",
+      "status": "CONFIRMED",
+      "confirmations_at_capture": [
+        "17",
+        "17"
+      ]
+    },
+    {
+      "stage": "MINT",
+      "transaction_hash": "0x84b6b0c5d69cc33021b20a462f8e042e5187218282a546a3d529846b5bba5d9e",
+      "nonce": 41,
+      "amount_raw": "2000000000000000",
+      "fee_wei": "91714200000000",
+      "block_number": "136928289",
+      "timestamp_utc": "2026-10-15T11:45:34.000Z",
+      "status": "CONFIRMED",
+      "confirmations_at_capture": [
+        "16",
+        "16"
+      ]
+    },
+    {
+      "stage": "ENTER",
+      "transaction_hash": "0x59cbd3b04a79d5659cfcc9326f8625db12f105683704a25dcfbcb1299e235aec",
+      "nonce": 42,
+      "amount_raw": "0",
+      "fee_wei": "21274200000000",
+      "block_number": "136928607",
+      "timestamp_utc": "2026-10-15T11:47:57.000Z",
+      "status": "CONFIRMED",
+      "confirmations_at_capture": [
+        "20",
+        "20"
+      ]
+    },
+    {
+      "stage": "BORROW",
+      "transaction_hash": "0x93386add11b7764126a7d447839d00bcf337c25cbdf33764cd0131efecbcc09c",
+      "nonce": 43,
+      "amount_raw": "400000000000000",
+      "fee_wei": "118688000000000",
+      "block_number": "136928940",
+      "timestamp_utc": "2026-10-15T11:50:27.000Z",
+      "status": "CONFIRMED",
+      "confirmations_at_capture": [
+        "21",
+        "21"
+      ]
+    },
+    {
+      "stage": "APPROVE_REPAY",
+      "transaction_hash": "0x818ef2f34a9a8ce51eedebac54522eb801276b77279922614ffbfd15799fa1e7",
+      "nonce": 44,
+      "amount_raw": "600000000000000",
+      "fee_wei": "9210400000000",
+      "block_number": "137142867",
+      "timestamp_utc": "2026-10-16T14:35:25.000Z",
+      "status": "CONFIRMED",
+      "confirmations_at_capture": [
+        "24",
+        "23"
+      ]
+    },
+    {
+      "stage": "PARTIAL_REPAY",
+      "transaction_hash": "0xb5729430662030a38e67dbd5d1c62af67b798427836d4c9f92ed9535f16d80f4",
+      "nonce": 45,
+      "amount_raw": "151041691845438",
+      "fee_wei": "80391600000000",
+      "block_number": "137143158",
+      "timestamp_utc": "2026-10-16T14:37:36.000Z",
+      "status": "CONFIRMED",
+      "confirmations_at_capture": [
+        "25",
+        "26"
+      ]
+    }
+  ],
+  "signature_count": 7,
+  "dispatch_count": 7,
+  "economic_retry_count": 0,
+  "cumulative_gas_fee_wei": "339494000000000",
+  "economic_steps_completed": [
+    "SEED",
+    "BORROW",
+    "PARTIAL_REPAY"
+  ],
+  "economic_action_count": 3,
+  "utc_dates_observed": [
+    "2026-10-15",
+    "2026-10-16"
+  ],
+  "five_actions_three_days": "NOT_PROVEN",
+  "current_observation": {
+    "block_number": "137143758",
+    "block_hash": "0x2f9b8e02ffbcc0771f87663bf829710f9ad5dea3d45db31c03b6c6cc7f4451ef",
+    "debt_raw": "250904770008340",
+    "wbnb_balance_raw": "248958308154562",
+    "allowance_raw": "448958308154562",
+    "vtoken_balance_raw": "49299",
+    "native_balance_wei": "14927948717144871"
+  },
+  "schedule": {
+    "partial_repay_not_before_utc": "2026-10-16T11:45:34.000Z",
+    "close_not_before_utc": "2026-10-17T11:45:34.000Z",
+    "basis": "Real MINT receipt timestamp; scheduled actions are not completed evidence"
+  },
+  "limits": {
+    "chain_id": 97,
+    "seed_raw": "2000000000000000",
+    "borrow_max_raw": "500000000000000",
+    "close_max_raw": "600000000000000",
+    "aggregate_gas_max_wei": "1000000000000000",
+    "native_reserve_wei": "10000000000000000",
+    "max_cumulative_signatures": 12,
+    "max_cumulative_dispatches": 12
+  },
+  "capture": {
+    "sha256": "36864de6388fbfdf68b9469cb13f48c95d4841def72595e73cd6c15a168befd6",
+    "original_wrap_archive_proof_sha256": "f55a55bf400dced7dab7e475fd02f1fe563012d4b6ee3f2a8626255e80395ece",
+    "canonical_current_state_rpc_sources": [
+      "https://bsc-testnet-dataseed.bnbchain.org",
+      "https://bsc-testnet-rpc.publicnode.com"
+    ],
+    "historical_receipt_lookup": {
+      "requested_url": "https://bsc-testnet-rpc.publicnode.com",
+      "actual_archive_receipt_url": "https://rpc.sentio.xyz/bsc-testnet",
+      "rule": "Only a null primary lookup for a protected anchored hash may use a live archive receipt; the full parsed receipt must equal the original capture exactly. Dataseed receipt and canonical headers remain checked.",
+      "stored_capture_returned_as_live": false
+    },
+    "original_wrap_historical_custody_sources": [
+      "https://rpc.sentio.xyz/bsc-testnet",
+      "https://bsc-testnet-rpc.publicnode.com"
+    ],
+    "metadata_normalization": "Canonical reads omit validated optional transaction.blockTimestamp and block.size; durable private response hashes retained. All custody amounts and consensus fields preserved.",
+    "archive_source_limit": "Distinct named RPC URLs, no certified backend independence or Merkle proof; Sentio endpoint documentation was not found"
+  },
+  "boundaries": {
+    "public_service": "READ_ONLY_VENUS_CORE",
+    "financial_signer": "LOCAL_FINITE_TRIAL_ONLY_NOT_ON_VPS",
+    "partial_repayment_proven": true,
+    "close_proven": false,
+    "redeem_proven": false,
+    "global_financial_service_enabled": false,
+    "qualification": "ORGANIZER_DETERMINATION",
+    "source_match_is_security_audit": false
+  }
+}

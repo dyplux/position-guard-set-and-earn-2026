@@ -2,7 +2,7 @@
 
 Position Guard 0.2.0 assesses Venus Core positions on BNB Chain testnet, chain 97. The public assessment service has no signer, automatic repayment or wallet-secret handling. Bounded testnet collateral setup is recorded. ERC-8004 identity 2583 on chain 97 is currently listed on Pokter, and three paid testnet customer hires have completed through that marketplace. Set and Earn campaign qualification remains `NOT_ATTESTED`.
 
-The four UI examples are labelled `SYNTHETIC`. Five synthetic state-override conformance checks matched the real lens. The original bounded Venus Core sample didn't establish real borrower handling. A separate F9 trial has now supplied **0.002 WBNB** and borrowed **0.0004 WBNB** in the Liquid Staked BNB pool on testnet97. [Five confirmed transactions and exact scope](docs/lst-trial-day1-2026-10-15.md). Repayment and the complete three-day loop remain unproven.
+The four UI examples are labelled `SYNTHETIC`. Five synthetic state-override conformance checks matched the real lens. The original bounded Venus Core sample didn't establish real borrower handling. A separate F9 trial has now supplied **0.002 WBNB** and borrowed **0.0004 WBNB** in the Liquid Staked BNB pool on testnet97. [Five confirmed transactions and exact scope](docs/lst-trial-day1-2026-10-15.md). A partial repayment of **0.000151041691845438 WBNB** confirmed on 16 October. [Day-2 receipts and scope](docs/lst-trial-day2-2026-10-16.md). Full close, redemption and the complete three-day loop remain unproven.
 
 ## Internal marketplace rehearsal, 13 October 2026
 
@@ -22,7 +22,7 @@ A separate read-only Core reader now handles the ten pinned legacy proxy getter 
 
 The Chainlink feed proxy executable is now reproduced from an earlier official source revision: **9,518 executable bytes match exactly**. Only the 32-byte IPFS metadata digest differs. [Source, compiler and comparison](docs/feed-proxy-source-2026-10-15.json). A recovery fix lets a funded emergency close use fresh debt and rate checks after the original wrap window expires; it never wraps twice or increases the finite caps. The public adapter still has no signer.
 
-The public service and adapter remain read-only and have no signer. A separate local operator completed day 1 of the bounded F9/97 protection trial on 15 October: supply and borrow, five transactions, no economic retry. It retained the 0.001 testBNB aggregate gas cap and 0.01 reserve. [The dated source comparison](docs/lst-source-comparison-2026-10-15.md) records source scope and metadata limits. Five useful lending actions across three days remain NOT PROVEN. [Trial boundaries](maintenance/LST-TRIAL-README.md) · [Read-only execution and recovery adapter](maintenance/LST-INTEGRATION.md).
+The public service and adapter remain read-only and have no signer. A separate local operator confirmed supply and borrow on 15 October and partial repayment on 16 October: three economic actions, seven transactions, two UTC dates and no economic retry. It retained the 0.001 testBNB aggregate gas cap and 0.01 reserve. [The dated source comparison](docs/lst-source-comparison-2026-10-15.md) records source scope and metadata limits. Five useful lending actions across three days remain NOT PROVEN. [Trial boundaries](maintenance/LST-TRIAL-README.md) · [Read-only execution and recovery adapter](maintenance/LST-INTEGRATION.md).
 
 ## Identity
 
@@ -30,7 +30,7 @@ Agent ID **2583**, BNB Chain testnet, chain **97**. Registry: `0x8004A818BFB9122
 
 [Recorded onchain proof](docs/identity-2026-10-10.json) · [Registration transaction](https://testnet.bscscan.com/tx/0x9b8bae8df548aaa1444b0ddb8cd97038825c842f2ea228bc40ee99f06af2cc30)
 
-Identity registration and test funding are preparation steps. The separate LST trial proves supply and borrow; repayment remains unproven. The earlier Venus Core collateral setup is recorded below.
+Identity registration and test funding are preparation steps. The separate LST trial proves supply, borrow and partial repayment; full close and redemption remain unproven. The earlier Venus Core collateral setup is recorded below.
 
 ## Public preview
 

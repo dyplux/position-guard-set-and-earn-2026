@@ -1,6 +1,6 @@
 # Evidence and campaign boundaries
 
-## Current checkpoint, 15 October 2026
+## Current checkpoint, 16 October 2026
 
 | Evidence | Status |
 |---|---|
@@ -8,12 +8,12 @@
 | ERC-8004 identity | Agent2583, chain97, F9 owner |
 | Marketplace | Pokter listing and three technically completed customer jobs, 1447/1449/1450 |
 | F9 outgoing hires | Three hire events across Pokter and HelloFugu; provider-report limitations retained in the linked evidence |
-| Separate LST supply and borrow | 0.002 WBNB supplied and 0.0004 WBNB borrowed; five confirmed transactions, no economic retry |
-| Repayment and redemption | NOT YET PROVEN |
-| Five useful lending actions across three days | NOT PROVEN; two economic actions on one UTC date so far |
+| Separate LST trial | 0.002 WBNB supplied, 0.0004 WBNB borrowed and 0.000151041691845438 WBNB partially repaid; seven confirmed transactions, no economic retry |
+| Full close and redemption | NOT YET PROVEN |
+| Five useful lending actions across three days | NOT PROVEN; three economic actions on two UTC dates so far |
 | Campaign eligibility | Determined by the organizers; technical evidence doesn't certify human ownership or funding independence |
 
-[Day-1 trial](lst-trial-day1-2026-10-15.md) · [Customer jobs](customer-hires-2026-10-14.md) · [Outgoing hires](outgoing-hires-2026-10-15.md).
+[Day-2 trial](lst-trial-day2-2026-10-16.md) · [Day-1 trial](lst-trial-day1-2026-10-15.md) · [Customer jobs](customer-hires-2026-10-14.md) · [Outgoing hires](outgoing-hires-2026-10-15.md).
 
 ## Historical checkpoint, 10 October 2026
 

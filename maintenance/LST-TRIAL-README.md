@@ -1,8 +1,8 @@
 # Wrapped-native LST trial
 
-## Live checkpoint, 15 October 2026
+## Live checkpoint, 16 October 2026
 
-A separate local operator supplied 0.002 WBNB and borrowed 0.0004 WBNB on testnet97, with five confirmed transactions and no economic retry. [Day-1 receipts and boundaries](../docs/lst-trial-day1-2026-10-15.md). The public modules below remain unsigned and read-only. Repayment and five useful actions across three days remain unproven.
+A separate local operator supplied 0.002 WBNB, borrowed 0.0004 WBNB and partially repaid 0.000151041691845438 WBNB on testnet97. Seven transactions confirmed across 15 and 16 October, with three economic actions and no economic retry. [Day-1 receipts and boundaries](../docs/lst-trial-day1-2026-10-15.md). The public modules below remain unsigned and read-only. Full close, redemption and five useful actions across three days remain unproven. [Day-2 receipts and transport provenance](../docs/lst-trial-day2-2026-10-16.md).
 
 The initial 500,000-gas mint simulation failed before signing. The reviewed private resource envelope used 650,000 for the five market stages, within the actor's existing 1,000,000 ceiling. Both RPCs estimated the mint at 503,843. The 12-stage maximum is 4,225,000 gas at 0.2 gwei, 0.000845 testBNB, below the unchanged 0.001 aggregate cap. This is a resource bound, not a promise that future simulations pass.
 
