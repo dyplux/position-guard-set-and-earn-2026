@@ -1,8 +1,10 @@
 # Wrapped-native LST trial
 
-## Live checkpoint, 16 October 2026
+## Live checkpoint, 17 October 2026
 
-A separate local operator supplied 0.002 WBNB, borrowed 0.0004 WBNB and partially repaid 0.000151041691845438 WBNB on testnet97. Seven transactions confirmed across 15 and 16 October, with three economic actions and no economic retry. [Day-1 receipts and boundaries](../docs/lst-trial-day1-2026-10-15.md). The public modules below remain unsigned and read-only. Full close, redemption and five useful actions across three days remain unproven. [Day-2 receipts and transport provenance](../docs/lst-trial-day2-2026-10-16.md).
+A separate finite local operator supplied 0.002 WBNB and borrowed 0.0004 WBNB on 15 October, partially repaid 0.000151041691845438 WBNB on 16 October, and confirmed full repayment and 0.002 WBNB redemption on 17 October. Twelve transactions record five economic actions on three UTC dates. Both interest topups and other support calls aren't counted as extra economic actions. Redeemed WBNB remains in F9. The public modules below remain unsigned and read-only. [Day 1](../docs/lst-trial-day1-2026-10-15.md) · [Day 2](../docs/lst-trial-day2-2026-10-16.md) · [Day 3 receipts, recovery and residuals](../docs/lst-trial-day3-2026-10-17.md). Campaign qualification remains the organizers' decision.
+
+The day-3 execution used a separately reviewed exit-only recovery after the normal CLOSE funding window expired. Its additional interest topup and new fixed 3600-slot forecast were explicit private authority changes within the original aggregate financial and 12-transaction caps. The aborted unsigned CLOSE and its reservation were preserved. The normal 300-slot planner described below wasn't silently renewed, and this recovery didn't enable the public emergency helpers. No UNWRAP was executed.
 
 The initial 500,000-gas mint simulation failed before signing. The reviewed private resource envelope used 650,000 for the five market stages, within the actor's existing 1,000,000 ceiling. Both RPCs estimated the mint at 503,843. The 12-stage maximum is 4,225,000 gas at 0.2 gwei, 0.000845 testBNB, below the unchanged 0.001 aggregate cap. This is a resource bound, not a promise that future simulations pass.
 
@@ -31,9 +33,9 @@ Measured exchange-rate/source truncation determines actual ratios. Oracle source
 
 `emergencyClose` bypasses the three-day wait with all caps/source barriers retained. `emergencyRedeem` permits zero-debt seed rollback. Both remain NOT_EXECUTABLE. Exiting market and unwrapping fresh own WBNB are support calls; unwrap is capped at 0.002, matching the separate actor's cap.
 
-The source clamps ERC20 repayment to accrued debt before `transferFrom`; excess WBNB stays in F9's wallet and unused allowance must be revoked. Finite close/headroom doesn't guarantee zero debt at inclusion. Redeeming exact seed can leave yield/vToken dust; capped unwrap can leave WBNB residue. No full-cleanup claim.
+The source clamps ERC20 repayment to accrued debt before `transferFrom`; excess WBNB stays in F9's wallet and unused allowance must be revoked. Finite close/headroom doesn't guarantee zero debt at inclusion. Redeeming exact seed can leave yield/vToken dust. This trial retained redeemed WBNB and unused interest buffer in F9; no unwrap or full-cleanup claim is made. No full-cleanup claim.
 
-The five action receipts omit support transactions from their fee subtotal. `fee_ledger_complete=false`: an actual adapter must reconcile **every transaction's fee**, reserve emergency gas, and enforce the 0.001 aggregate before any financial use. The original unsigned template listed 3,655,000 gas including optional market exit, 0.000731 native at 0.2 gwei. That dated preparation subtotal is separate from the current 12-stage resource envelope above: 4,225,000 gas, 0.000845 testBNB, with fresh simulations and the unchanged 0.001 aggregate cap.
+The five action receipts omit support transactions from their fee subtotal. `fee_ledger_complete=false`: an actual adapter must reconcile **every transaction's fee**, reserve emergency gas, and enforce the 0.001 aggregate before any financial use. The original unsigned template listed 3,655,000 gas including optional market exit, 0.000731 native at 0.2 gwei. That dated preparation subtotal is separate from the current 12-stage resource envelope above: 4,225,000 gas, 0.000845 testBNB, with fresh simulations and the unchanged 0.001 aggregate cap. The linked day-3 execution proof separately reconciles every actual fee across the original and recovery transactions; the template subtotal isn't that execution ledger.
 
 Focused tests: `npm ci --prefix read_only --ignore-scripts`, then `node --test test_lst_reader.cjs test_lst_trial.cjs`. No actions or counts are guaranteed; wrapping and approvals aren't useful-action claims.
 

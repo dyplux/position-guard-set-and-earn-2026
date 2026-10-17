@@ -2,27 +2,27 @@
 
 Position Guard 0.2.0 assesses Venus Core positions on BNB Chain testnet, chain 97. The public assessment service has no signer, automatic repayment or wallet-secret handling. Bounded testnet collateral setup is recorded. ERC-8004 identity 2583 on chain 97 is currently listed on Pokter, and three paid testnet customer hires have completed through that marketplace. Set and Earn campaign qualification remains `NOT_ATTESTED`.
 
-The four UI examples are labelled `SYNTHETIC`. Five synthetic state-override conformance checks matched the real lens. The original bounded Venus Core sample didn't establish real borrower handling. A separate F9 trial has now supplied **0.002 WBNB** and borrowed **0.0004 WBNB** in the Liquid Staked BNB pool on testnet97. [Five confirmed transactions and exact scope](docs/lst-trial-day1-2026-10-15.md). A partial repayment of **0.000151041691845438 WBNB** confirmed on 16 October. [Day-2 receipts and scope](docs/lst-trial-day2-2026-10-16.md). Full close, redemption and the complete three-day loop remain unproven.
+The four UI examples are labelled `SYNTHETIC`. Five synthetic state-override conformance checks matched the real lens. The original bounded Venus Core sample didn't establish real borrower handling. A separate F9 trial has now supplied **0.002 WBNB** and borrowed **0.0004 WBNB** in the Liquid Staked BNB pool on testnet97. [Five confirmed transactions and exact scope](docs/lst-trial-day1-2026-10-15.md). A partial repayment of **0.000151041691845438 WBNB** confirmed on 16 October. [Day-2 receipts and scope](docs/lst-trial-day2-2026-10-16.md). Full repayment and redemption confirmed on 17 October. The same trial records five economic actions, 12 confirmed transactions and three UTC dates, 15, 16 and 17 October. Redeemed WBNB remains in F9. [Day-3 receipts, recovery and measured residuals](docs/lst-trial-day3-2026-10-17.md). Campaign qualification remains the organizers' decision.
 
 ## Internal marketplace rehearsal, 13 October 2026
 
 Job **1444** completed on BNB Chain testnet: one signed quote, seven transactions, a public `NO_DEBT` assessment and a confirmed **0.1 testU** payout. It was a self-hire, so it doesn't count as an external customer. [Recorded transaction and delivery evidence](docs/internal-hire-2026-10-13.json).
 
-The browser's **Connect wallet** button reads the selected address and chain. It doesn't sign or send transactions. Public assessments remain read-only. Five useful actions across three days remain unproven.
+The browser's **Connect wallet** button reads the selected address and chain. It doesn't sign or send transactions. Public assessments remain read-only. The separate local LST trial's five-action evidence is recorded in the dated day-3 proof; the public browser doesn't execute those actions.
 
 ## Customer hires, 14 October 2026
 
 Jobs **1447**, **1449** and **1450** completed on BNB Chain testnet. Each paid **0.1 testU** and produced a public `NO_DEBT` report. Job 1450 was settled by an external caller whose identity is unknown. [Sanitized report and verification limits](docs/customer-hires-2026-10-14.md) · [Evidence JSON](docs/customer-hires-2026-10-14.json).
 
-## Current evidence, 15 October 2026
+## Current evidence, 17 October 2026
 
 The registered wallet hired **three other agents across Pokter and HelloFugu**. Both Pokter jobs completed, with token payouts verified through two RPC providers. The HelloFugu subscription event is confirmed; its specific paid-report linkage remains UNKNOWN. [Outgoing hire evidence](docs/outgoing-hires-2026-10-15.md).
 
 A separate read-only Core reader now handles the ten pinned legacy proxy getter encodings. The recorded observation has **49/49 complete account snapshots**. The effective native oracle override has no timestamp, so freshness remains UNKNOWN. This doesn't enable automatic financial maintenance. [Recorded getter evidence](docs/core-getter-compatibility-2026-10-15.json) · [Maintenance modules](maintenance/README.md).
 
-The Chainlink feed proxy executable is now reproduced from an earlier official source revision: **9,518 executable bytes match exactly**. Only the 32-byte IPFS metadata digest differs. [Source, compiler and comparison](docs/feed-proxy-source-2026-10-15.json). A recovery fix lets a funded emergency close use fresh debt and rate checks after the original wrap window expires; it never wraps twice or increases the finite caps. The public adapter still has no signer.
+The Chainlink feed proxy executable is now reproduced from an earlier official source revision: **9,518 executable bytes match exactly**. Only the 32-byte IPFS metadata digest differs. [Source, compiler and comparison](docs/feed-proxy-source-2026-10-15.json). The dated public recovery helper remains unsigned. The actual day-3 exit used a separately reviewed private recovery authority after the normal funding window expired, including one additional interest topup within the original aggregate caps. [Recovery scope and receipts](docs/lst-trial-day3-2026-10-17.md).
 
-The public service and adapter remain read-only and have no signer. A separate local operator confirmed supply and borrow on 15 October and partial repayment on 16 October: three economic actions, seven transactions, two UTC dates and no economic retry. It retained the 0.001 testBNB aggregate gas cap and 0.01 reserve. [The dated source comparison](docs/lst-source-comparison-2026-10-15.md) records source scope and metadata limits. Five useful lending actions across three days remain NOT PROVEN. [Trial boundaries](maintenance/LST-TRIAL-README.md) · [Read-only execution and recovery adapter](maintenance/LST-INTEGRATION.md).
+The public service and adapter remain read-only and have no signer. A separate finite local operator confirmed supply and borrow on 15 October, partial repayment on 16 October, and full repayment and redemption on 17 October: five economic actions, 12 confirmed transactions and three UTC dates, 15, 16 and 17 October. Both interest topups are support transactions. The 0.001 testBNB aggregate gas cap and 0.01 testBNB reserve were retained. Redeemed WBNB remains in F9; final debt, allowance and residuals are measured in the [day-3 proof](docs/lst-trial-day3-2026-10-17.md). The [dated source comparison](docs/lst-source-comparison-2026-10-15.md) retains its source and metadata limits. Organizer qualification remains unconfirmed. [Trial boundaries](maintenance/LST-TRIAL-README.md).
 
 ## Identity
 
@@ -30,7 +30,7 @@ Agent ID **2583**, BNB Chain testnet, chain **97**. Registry: `0x8004A818BFB9122
 
 [Recorded onchain proof](docs/identity-2026-10-10.json) · [Registration transaction](https://testnet.bscscan.com/tx/0x9b8bae8df548aaa1444b0ddb8cd97038825c842f2ea228bc40ee99f06af2cc30)
 
-Identity registration and test funding are preparation steps. The separate LST trial proves supply, borrow and partial repayment; full close and redemption remain unproven. The earlier Venus Core collateral setup is recorded below.
+Identity registration and test funding are preparation steps. The separate LST trial records supply, borrow, partial repayment, full repayment and redemption in its dated receipts. The earlier Venus Core collateral setup is recorded below.
 
 ## Public preview
 
@@ -97,7 +97,7 @@ Configure a stdio MCP server with command `python3` and args containing the abso
 
 ## Recorded native collateral setup
 
-The registered wallet supplied **0.001 testBNB** to Venus Core vBNB and entered that market. Both transactions were reconciled from receipts and position state. That dated Core setup had no debt; it is separate from the later LST loan. These are two setup transactions on one day; five useful actions on three days remain incomplete.
+The registered wallet supplied **0.001 testBNB** to Venus Core vBNB and entered that market. Both transactions were reconciled from receipts and position state. That dated Core setup had no debt; it is separate from the later LST loan. That earlier Core sample contains two setup transactions on one day. The later three-date LST evidence is a separate trial.
 
 [Actual setup evidence](docs/native-setup-2026-10-10.json) · [Pure setup planner](keeper_plan.py) · [Local operator reference and limits](operations/README.md)
 
